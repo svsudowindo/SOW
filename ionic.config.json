@@ -1,0 +1,7 @@
+{
+  "name": "SOW",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
