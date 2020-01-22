@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonRequestService } from '../../../shared/services/http/common-request.service';
 import { RequestEnums } from '../../../shared/constants/request-enums';
@@ -6,49 +6,48 @@ import { StorageService } from '../../../shared/services/common/storage.service'
 import { LoaderService } from '../../../shared/services/common/loader/loader.service';
 import { SPINNER_TYPE } from '../../../shared/services/common/loader/spinner-enums';
 import { AlertService, ButtonModel } from '../../../shared/services/common/alert/alert.service';
+import { BaseClass } from 'src/app/shared/services/common/baseClass';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseClass implements OnInit{
 
+  loginForm: FormGroup;
+  validationMessages = {
+    username: [
+      { type: 'required', message: 'Username is required'}
+    ],
+    password: [
+      { type: 'required', message: 'Password is required'}
+    ]
+  }
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private commonRequestService: CommonRequestService, private storageService: StorageService, private loaderService: LoaderService, private alertService: AlertService) { }
-
-  ngOnInit() { }
-  registration() {
-    this.router.navigate(['registration']);
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private loaderService: LoaderService,
+    public injector: Injector
+    ) {
+    super(injector);
   }
 
-  getInfo() {
-    this.commonRequestService.request(RequestEnums.LOGIN).subscribe(res => {
-      console.log(res);
+  ngOnInit() {
+    this.initLoginForm();
+  }
+
+  initLoginForm() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.compose([Validators.required])]
     });
   }
+
 
   openLoader() {
     this.loaderService.showLoader('loading sample 123....', SPINNER_TYPE.DOTS, true, 5000, true, '', true, true, true);
-  }
-
-  openAlert() {
-    const buttonsArray: ButtonModel[] = [
-      {
-        text: 'okay',
-        cssClass: 'danger',
-        haveHandler: true,
-        dismissMessage: 'Okay'
-      },
-      {
-        text: 'cancel',
-        cssClass: 'danger',
-        haveHandler: true,
-        dismissMessage: 'cancel'
-      }
-    ];
-    this.alertService.openAlert('Heading', 'subheading', 'My message', buttonsArray).then(res => {
-      console.log(res);
-    });
   }
 }

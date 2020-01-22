@@ -25,12 +25,29 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+.pointer {
+    cursor: pointer;
+}
 
+.circle {
+  border-radius: 50%;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+.error.height-match {
+    margin-top: 5px;
+    margin-left: 10px;
+}
 
 .center {
     margin:auto;
 }
 
-ion-button {
-    width: 140px;
+.action-buttons {
+    ion-button {
+        width: 140px;
+    }
 }

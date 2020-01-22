@@ -1,12 +1,32 @@
 <div class="center w-p-100">
-    <form>
-        <ion-item class="m-l-r-10">
-            <ion-label position="floating" type="text">Username</ion-label>
-            <ion-input></ion-input>
-        </ion-item>
-        <ion-item class="m-l-r-10">
-            <ion-label position="floating" type="password">Password</ion-label>
-            <ion-input></ion-input>
-        </ion-item>
+    <form [formGroup]="loginForm">
+        <div class="m-l-r-10 h-px-90">
+            <ion-item>
+                <ion-label position="floating">Username</ion-label>
+                <ion-input type="text" formControlName="username"></ion-input>
+            </ion-item>
+            <div [hidden]="!isValidField(loginForm, 'username')">
+                <p class="error height-match">{{getErrorMessage(loginForm, validationMessages, 'username')}}</p>
+            </div>
+        </div>
+        <div class="m-l-r-10 h-px-70">
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+            <div [hidden]="!isValidField(loginForm, 'password')">
+                <p class="error height-match">{{getErrorMessage(loginForm, validationMessages, 'password')}}</p>
+            </div>
+        </div>
+
+        <div text-center class="m-l-r-10">
+            <ion-button expand="block" fill="outline">Login</ion-button>
+            <div class="m-t-10">
+                <div float-right>
+                    <a>Forgot Password ?</a>
+                </div>
+            </div>
+        </div>
+
     </form>
 </div>
