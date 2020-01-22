@@ -1,0 +1,78 @@
+
+<ion-content>
+<form [formGroup]="registerationForm" #registerationNgForm="ngForm"  (ngSubmit)="onSubmit()" >
+   <ion-grid>
+      <div  class="m-b-10">
+        <div  class="p-r-12">
+          <ion-item class="full-width">
+              <ion-label position='floating'>FirstName</ion-label>
+      
+            <ion-input matInput
+                   name="firstname"
+                   formControlName="firstname"
+                   required
+                   autocomplete="off"
+                   trimOnBlur></ion-input>
+            <div *ngIf="registerationForm.get('firstname').invalid && registerationForm.get('firstname').touched">
+              {{ getErrorMessage(registerationForm, validation_messages, 'firstname', 'firstname') }}
+            </div>
+          </ion-item>
+        </div>
+        <div  class="p-r-12">
+          <ion-item class="full-width">
+              <ion-label position='floating'>LastName</ion-label>
+      <ion-input matInput
+                   name="lastname"
+                   formControlName="lastname"
+                   required
+                   autocomplete="off" trimOnBlur></ion-input>
+            <div *ngIf="registerationForm.get('lastname').invalid && registerationForm.get('lastname').touched">
+              {{ getErrorMessage(registerationForm, validation_messages, 'lastname', 'lastname') }}
+            </div>
+          </ion-item>
+        </div>
+      </div>
+      <div  class="m-b-10">
+        <div  class="p-r-12">
+          <ion-item class="full-width">
+              <ion-label position='floating'>Email Id</ion-label>
+       <ion-input matInput
+                   type="email"
+                   name="email"
+                   formControlName="email"
+                   required
+                   autocomplete="off" trimOnBlur></ion-input>
+            <div *ngIf="registerationForm.get('email').invalid && registerationForm.get('email').touched">
+              {{ getErrorMessage(registerationForm, validation_messages, 'email', 'email') }}
+            </div>
+          </ion-item>
+        </div>
+        <div  class="p-r-12">
+          <ion-item class="full-width">
+              <ion-label position='floating'>Phone Number</ion-label>
+            <ion-input matInput
+                   name="phone"
+                   formControlName="phone"
+                   required maxlength="10"
+                   minlength="10"
+                   autocomplete="off" trimOnBlur></ion-input>
+            <div *ngIf="registerationForm.get('phone').invalid && registerationForm.get('phone').touched">
+              {{ getErrorMessage(registerationForm, validation_messages, 'phone', 'phone') }}
+            </div>
+          </ion-item>
+        </div>
+      </div>
+
+    
+    </ion-grid>
+      <div fxLayoutAlign="flex-end">
+        <div class="m-b-r">
+          <ion-button  [disabled]="!registerationForm.valid" type="submit">Submit</ion-button>
+        </div>
+      </div>
+</form>
+</ion-content>
+
+
+
+
