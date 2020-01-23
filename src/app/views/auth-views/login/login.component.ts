@@ -24,7 +24,7 @@ export class LoginComponent extends BaseClass implements OnInit{
     password: [
       { type: 'required', message: 'Password is required'}
     ]
-  }
+  };
   // tslint:disable-next-line:max-line-length
   constructor(
     private formBuilder: FormBuilder,

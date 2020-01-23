@@ -26,6 +26,10 @@ const routes: Routes = [
 
       },
       {
+        path: 'forgot-password',
+        loadChildren: () => import('./views/auth-views/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+      },
+      {
         path: '404',
         loadChildren: () => import('./views/auth-views/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule)
       },
