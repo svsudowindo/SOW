@@ -44,7 +44,7 @@ const routes: Routes = [
     path: '',
     component: AdminLayoutComponent,
     canActivate: [CanActivateService],
-    canActivateChild: [ CanActivateChildService ], // Use when we want to make a disission to load sub modules or not
+    canActivateChild: [CanActivateChildService], // Use when we want to make a disission to load sub modules or not
     children: [
       {
         path: 'dashboard',
