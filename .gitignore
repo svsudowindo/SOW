@@ -29,3 +29,4 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+/src/api/node_modules
