@@ -1,9 +1,9 @@
 import { Registration } from './registration.model';
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { CustomValidators } from 'src/app/shared/services/common/validators';
-import { VALIDATION_PATTERNS } from 'src/app/shared/constants/validation-patterns';
 import { BaseClass } from 'src/app/shared/services/common/baseClass';
+import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/shared/services/common/loader/loader.service';
 
 @Component({
   selector: 'app-registration',
@@ -12,80 +12,77 @@ import { BaseClass } from 'src/app/shared/services/common/baseClass';
 })
 export class RegistrationComponent extends BaseClass implements OnInit {
 
-  public registerationForm: FormGroup;
-  public registrationObject = new Registration();
-  @ViewChild('registerationNgForm', {static: true}) registerationNgForm: FormGroupDirective;
-  public validation_messages = {
-    'firstname': [
-      { type: 'required', message: 'Please enter firstname' },
-      { type: 'whitespace', message: 'Please enter valid firstname' },
-      { type: 'pattern', message: 'Please enter alphabets only' },
-      { type: 'maxlength', message: 'Firstname can be maximum of 20 characters' },
-      { type: 'minlength', message: 'Firstname should be minimum of 2 characters' }
+  registerForm: FormGroup;
+  validationMessages = {
+    firstName: [
+      { type: 'required', message: 'First Name is required' }
     ],
-    'email': [
-      { type: 'required', message: 'Please enter email' },
-      { type: 'pattern', message: 'Please enter valid email' }
+    lastName: [
+      { type: 'required', message: 'Last Name is required' }
     ],
-    'lastname': [
-      { type: 'required', message: 'Please enter LastName' },
-      { type: 'whitespace', message: 'Please enter valid lastname' },
-      { type: 'pattern', message: 'Please enter alphabets only' },
-      { type: 'maxlength', message: 'Lastname can be maximum of 20 characters' },
-      { type: 'minlength', message: 'Lastname should be minimum of 3 characters' }
+    email: [
+      { type: 'required', message: 'Email is required' }
     ],
-    'phone': [
-      { type: 'required', message: 'Please enter Phone number' },
-      { type: 'pattern', message: 'Please enter only digits for phone number' },
-      { type: 'maxlength', message: 'Phone number can be maximum of 10 digits' },
-      { type: 'minlength', message: 'Phone number should be minimum of 10 digits' },
-      { type: 'phoneNumber', message: 'Please enter valid mobile number' }
-    ]
+    phoneNumber: [
+      { type: 'required', message: 'Phone Number is required' }
+    ],
+    securityQuestion: [
+      { type: 'required', message: 'Security Question is required' }
+    ],
+    securityAnswer: [
+      { type: 'required', message: 'Security Answer is required' }
+    ],
+    licenseeNumber: [
+      { type: 'required', message: 'Licensee Number is required' }
+    ],
+    businessName: [
+      { type: 'required', message: 'Business Name is required' }
+    ],
+    shopName: [
+      { type: 'required', message: 'Shop Name is required' }
+    ],
+    address: [
+      { type: 'required', message: 'Address is required' }
+    ],
+    city: [
+      { type: 'required', message: 'City is required' }
+    ],
+    GA: [
+      { type: 'required', message: 'GA is required' }
+    ],
+    zipcode: [
+      { type: 'required', message: 'Zipcode is required' }
+    ],
   };
-
-  constructor(public injector: Injector,
-    private _formBuilder: FormBuilder) { 
-      super(injector);
-    }
+  // tslint:disable-next-line:max-line-length
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private loaderService: LoaderService,
+    public injector: Injector
+  ) {
+    super(injector);
+  }
 
   ngOnInit() {
-
-    this.initializeForm();
+    this.initLoginForm();
   }
 
-  initializeForm() {
-    this.registerationForm = this._formBuilder.group({
-      firstname: ['', Validators.compose([
-        Validators.required, CustomValidators.noWhitespaceValidator, Validators.pattern('^[A-Za-z\' \']*$'),
-        Validators.maxLength(20),
-        Validators.minLength(2)
-      ])],
-      email: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern(VALIDATION_PATTERNS.EMAIL)
-      ])],
-      lastname: ['', Validators.compose([
-        Validators.required, CustomValidators.noWhitespaceValidator, Validators.pattern('^[A-Za-z\' \']*$'),
-        Validators.maxLength(20),
-        Validators.minLength(3)
-      ])],
-      phone: ['', Validators.compose([
-        Validators.minLength(10),
-        Validators.pattern(VALIDATION_PATTERNS.POSITIVE_INTEGER),
-        Validators.maxLength(10),
-        Validators.minLength(10),
-        CustomValidators.phoneNumberValidator
-      ])]
+  initLoginForm() {
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.compose([Validators.required])],
+      lastName: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required])],
+      phoneNumber: ['', Validators.compose([Validators.required])],
+      securityQuestion: ['', Validators.compose([Validators.required])],
+      securityAnswer: ['', Validators.compose([Validators.required])],
+      licenseeNumber: ['', Validators.compose([Validators.required])],
+      businessName: ['', Validators.compose([Validators.required])],
+      shopName: ['', Validators.compose([Validators.required])],
+      address: ['', Validators.compose([Validators.required])],
+      city: ['', Validators.compose([Validators.required])],
+      GA: ['', Validators.compose([Validators.required])],
+      zipcode: ['', Validators.compose([Validators.required])],
     });
   }
-
-  onSubmit() {
-    if (this.registerationForm.valid) {
-      console.log(this.registerationForm.value);
-      this.registerationForm.reset();
-      this.registerationNgForm.resetForm();
-    }
-  }
-
-
 }

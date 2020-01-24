@@ -1,78 +1,152 @@
-
 <ion-content>
-<form [formGroup]="registerationForm" #registerationNgForm="ngForm"  (ngSubmit)="onSubmit()" >
-   <ion-grid>
-      <div  class="m-b-10">
-        <div  class="p-r-12">
-          <ion-item class="full-width">
-              <ion-label position='floating'>FirstName</ion-label>
-      
-            <ion-input matInput
-                   name="firstname"
-                   formControlName="firstname"
-                   required
-                   autocomplete="off"
-                   trimOnBlur></ion-input>
-            <div *ngIf="registerationForm.get('firstname').invalid && registerationForm.get('firstname').touched">
-              {{ getErrorMessage(registerationForm, validation_messages, 'firstname', 'firstname') }}
-            </div>
-          </ion-item>
-        </div>
-        <div  class="p-r-12">
-          <ion-item class="full-width">
-              <ion-label position='floating'>LastName</ion-label>
-      <ion-input matInput
-                   name="lastname"
-                   formControlName="lastname"
-                   required
-                   autocomplete="off" trimOnBlur></ion-input>
-            <div *ngIf="registerationForm.get('lastname').invalid && registerationForm.get('lastname').touched">
-              {{ getErrorMessage(registerationForm, validation_messages, 'lastname', 'lastname') }}
-            </div>
-          </ion-item>
+  <div class="center m-t-20 w-p-100">
+    <form [formGroup]="registerForm">
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">First Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="firstName"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'firstName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'firstName')}}</p>
         </div>
       </div>
-      <div  class="m-b-10">
-        <div  class="p-r-12">
-          <ion-item class="full-width">
-              <ion-label position='floating'>Email Id</ion-label>
-       <ion-input matInput
-                   type="email"
-                   name="email"
-                   formControlName="email"
-                   required
-                   autocomplete="off" trimOnBlur></ion-input>
-            <div *ngIf="registerationForm.get('email').invalid && registerationForm.get('email').touched">
-              {{ getErrorMessage(registerationForm, validation_messages, 'email', 'email') }}
-            </div>
-          </ion-item>
-        </div>
-        <div  class="p-r-12">
-          <ion-item class="full-width">
-              <ion-label position='floating'>Phone Number</ion-label>
-            <ion-input matInput
-                   name="phone"
-                   formControlName="phone"
-                   required maxlength="10"
-                   minlength="10"
-                   autocomplete="off" trimOnBlur></ion-input>
-            <div *ngIf="registerationForm.get('phone').invalid && registerationForm.get('phone').touched">
-              {{ getErrorMessage(registerationForm, validation_messages, 'phone', 'phone') }}
-            </div>
-          </ion-item>
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Last Name<span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="lastName"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'lastName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'lastName')}}</p>
         </div>
       </div>
 
-    
-    </ion-grid>
-      <div fxLayoutAlign="flex-end">
-        <div class="m-b-r">
-          <ion-button  [disabled]="!registerationForm.valid" type="submit">Submit</ion-button>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Email <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'email')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'email')}}</p>
         </div>
       </div>
-</form>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Phone Number <span class="error">*</span></ion-label>
+          <ion-input type="number" formControlName="phoneNumber"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'phoneNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'phoneNumber')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Security Question<span class="error">*</span></ion-label>
+          <ion-select formControlName="securityQuestion">
+            <ion-select-option value="f">Nik Name</ion-select-option>
+            <ion-select-option value="m">Date of birth</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'securityQuestion')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'securityQuestion')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Security Answer<span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="securityAnswer"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'securityAnswer')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'securityAnswer')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Licensee Number <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="licenseeNumber"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
+        </div>
+      </div>
+
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Business Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="businessName"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'businessName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Shop Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="shopName"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'shopName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'shopName')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 ">
+        <ion-item>
+          <ion-label position="floating">Address <span class="error">*</span></ion-label>
+          <ion-textarea formControlName="address"></ion-textarea>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'address')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'address')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">City <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="city"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'city')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'city')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">GA <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="GA"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'GA')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'GA')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Zipcode <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="zipcode"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'zipcode')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'zipcode')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 m-t-10 m-b-10 ion-text-center">
+        <ion-button expand="block" fill="outline" [siabled]="registerForm.invalid">Register</ion-button>
+        <div class="m-t-10">
+          <div class="ion-float-left">
+            <a routerLink="/forgot-password">Forgot Password ?</a>
+          </div>
+          <div class="ion-float-right">
+            <a routerLink="/login">Login ?</a>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
 </ion-content>
-
-
-
-
