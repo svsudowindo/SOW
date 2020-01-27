@@ -136,7 +136,7 @@
       </div>
 
       <div class="m-l-r-10 m-t-10 m-b-10 ion-text-center">
-        <ion-button expand="block" fill="outline" [siabled]="registerForm.invalid">Register</ion-button>
+        <ion-button expand="block" fill="outline" [disabled]="registerForm.invalid" (click)="register()">Register</ion-button>
         <div class="m-t-10">
           <div class="ion-float-left">
             <a routerLink="/forgot-password">Forgot Password ?</a>

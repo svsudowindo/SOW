@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular
 import { BaseClass } from 'src/app/shared/services/common/baseClass';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/services/common/loader/loader.service';
+import { CommonRequestService } from 'src/app/shared/services/http/common-request.service';
+import { RequestEnums } from 'src/app/shared/constants/request-enums';
 
 @Component({
   selector: 'app-registration',
@@ -59,7 +61,8 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private loaderService: LoaderService,
-    public injector: Injector
+    public injector: Injector,
+    private commonRequestService: CommonRequestService
   ) {
     super(injector);
   }
@@ -83,6 +86,12 @@ export class RegistrationComponent extends BaseClass implements OnInit {
       city: ['', Validators.compose([Validators.required])],
       GA: ['', Validators.compose([Validators.required])],
       zipcode: ['', Validators.compose([Validators.required])],
+    });
+  }
+
+  register() {
+    this.commonRequestService.request(RequestEnums.REGISTER_USER, this.registerForm.value).subscribe(res => {
+      console.log(res);
     });
   }
 }

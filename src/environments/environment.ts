@@ -7,7 +7,7 @@ export const environment = {
   logger: {
     enabled: true
   },
-  BASEURL: ''
+  BASEURL: 'http://localhost:4500'
 };
 
 /*

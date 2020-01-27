@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
     type: String,
     required: true
   },
@@ -9,48 +13,54 @@ var UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  id: {
-    type: String,
-    required: true
-  },
-  companyID: {
-    type: String,
-    required: true
-  },
-  role: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-  },
-  createdBy: {
-    type: String,
-    default: ''
-  },
-  updatedBy: {
-    type: String,
-    default: ''
-  },
-  createdAt: {
-    type: Date,
-    default: (new Date()).getMilliseconds()
-  },
-  updatedAt: {
-    type: Date,
-    default: (new Date()).getMilliseconds()
-  },
-  dateOfJoining: {
-    type: Date,
-    required: true
-  },
-  status: {
+  phoneNumber: {
     type: Number,
     required: true
   },
-  designation: {
+  securityQuestion: {
     type: String,
     required: true
+  },
+  securityAnswer: {
+    type: String,
+    required: true
+  },
+  licenseeNumber: {
+    type: String,
+    required: true
+  },
+  businessName: {
+    type: String,
+    required: true
+  },
+  shopName: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  GA: {
+    type: String,
+    required: true
+  },
+  zipcode: {
+    type: String,
+    required: true
+  },
+  createDate: {
+    type: Date,
+    default: (new Date()).getMilliseconds()
+  },
+  updatedDate: {
+    type: Date,
+    required: true,
+    default: (new Date()).getMilliseconds()
   }
 })
 

@@ -4,19 +4,16 @@ var emailService = require('../../../common/email.config/email.config');
 
 exports.createUser = (req, res, next) => {
   let payload = req.body;
-  if (payload.role === 'SUPER_ADMIN') {
-    pushUserToDB(req, res, next);
-  } else {
-    User.find({ $or: [{ _id: req.params['id'], companyID: payload.companyID, role: 'ADMIN' }, { _id: req.params['id'], role: 'SUPER_ADMIN' }] }, (err, adminList) => {
-      if (err) {
-        return res.send(Utils.sendResponse(500, null, ['Unable to fetch Users. Please try again...'], 'Unable to fetch Users. Please try again...'));
-      }
-      if (adminList.length <= 0) {
-        return res.send(Utils.sendResponse(500, null, ['Unauthorized User'], 'Unauthorized User'));
-      }
-      pushUserToDB(req, res, next);
-    })
-  }
+  var user = new User(payload);
+  user.save((userError, savedUser) => {
+    if (userError) {
+      return res.send(Utils.sendResponse(500, null, ['Unable to  create User. Please try again'], 'Unable to fetch user. Please try again'));
+    }
+    if (savedUser.length >= 0) {
+      return res.send(Utils.sendResponse(400, null, ['Unauthorized user'], 'Unauthorized user'));
+    }
+    return res.send(Utils.sendResponse(200, savedUser, [], 'User Saved Successfully'));
+  })
 }
 
 pushUserToDB = (req, res, next) => {

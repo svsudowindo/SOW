@@ -1,7 +1,7 @@
 export const RequestEnums = {
-    LOGIN: {
-        type: 'GET',
-        path: '/todos',
+    REGISTER_USER: {
+        type: 'POST',
+        path: '/auth/register',
         keys: [],
         values: []
     }

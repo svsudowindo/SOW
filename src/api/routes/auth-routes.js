@@ -1,12 +1,8 @@
 var express = require('express');
 var authRoutes = express.Router();
 
-var loginDAO = require('../controllers/auth/login/login.dao');
-var companyDAO = require('../controllers/auth/company/company.dao');
-var forgotPasswordDAO = require('../controllers/auth/forgot-password/forgot-password.dao');
+var UserDao = require('../controllers/auth/user/user.dao');
 
-authRoutes.post('/:id/register', companyDAO.addCompany);
-authRoutes.post('/login', loginDAO.login);
-authRoutes.post('/forgot-password', forgotPasswordDAO.forgotPassword);
+authRoutes.post('/register', UserDao.createUser);
 
 exports.authRoutes = authRoutes;
