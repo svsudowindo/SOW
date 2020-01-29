@@ -87,11 +87,21 @@
 
       <div class="m-l-r-10 h-px-90">
         <ion-item>
-          <ion-label position="floating">Shop Name <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="shopName"></ion-input>
+          <ion-label position="floating">Location Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="locationName"></ion-input>
         </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'shopName')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'shopName')}}</p>
+        <div [hidden]="!isValidField(registerForm, 'locationName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'locationName')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Store Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="storeName"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'storeName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'storeName')}}</p>
         </div>
       </div>
 
@@ -117,11 +127,11 @@
 
       <div class="m-l-r-10 h-px-90">
         <ion-item>
-          <ion-label position="floating">GA <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="GA"></ion-input>
+          <ion-label position="floating">State <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="state"></ion-input>
         </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'GA')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'GA')}}</p>
+        <div [hidden]="!isValidField(registerForm, 'state')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'state')}}</p>
         </div>
       </div>
 

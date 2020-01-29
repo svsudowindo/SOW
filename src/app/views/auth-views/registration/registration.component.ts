@@ -40,8 +40,11 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     businessName: [
       { type: 'required', message: 'Business Name is required' }
     ],
-    shopName: [
-      { type: 'required', message: 'Shop Name is required' }
+    locationName: [
+      { type: 'required', message: 'Location Name is required' }
+    ],
+    storeName: [
+      { type: 'required', message: 'Store Name is required' }
     ],
     address: [
       { type: 'required', message: 'Address is required' }
@@ -49,8 +52,8 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     city: [
       { type: 'required', message: 'City is required' }
     ],
-    GA: [
-      { type: 'required', message: 'GA is required' }
+    state: [
+      { type: 'required', message: 'State is required' }
     ],
     zipcode: [
       { type: 'required', message: 'Zipcode is required' }
@@ -81,14 +84,18 @@ export class RegistrationComponent extends BaseClass implements OnInit {
       securityAnswer: ['', Validators.compose([Validators.required])],
       licenseeNumber: ['', Validators.compose([Validators.required])],
       businessName: ['', Validators.compose([Validators.required])],
-      shopName: ['', Validators.compose([Validators.required])],
+      locationName: ['', Validators.compose([Validators.required])],
+      storeName: ['', Validators.compose([Validators.required])],
       address: ['', Validators.compose([Validators.required])],
       city: ['', Validators.compose([Validators.required])],
-      GA: ['', Validators.compose([Validators.required])],
+      state: ['', Validators.compose([Validators.required])],
       zipcode: ['', Validators.compose([Validators.required])],
     });
   }
 
+  /**
+   * Register a user
+   */
   register() {
     this.commonRequestService.request(RequestEnums.REGISTER_USER, this.registerForm.value).subscribe(res => {
       console.log(res);
