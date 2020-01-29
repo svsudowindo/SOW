@@ -8,8 +8,6 @@ import { SPINNER_TYPE } from '../../../shared/services/common/loader/spinner-enu
 import { AlertService, ButtonModel } from '../../../shared/services/common/alert/alert.service';
 import { BaseClass } from 'src/app/shared/services/common/baseClass';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LOCATION_MASTER } from 'src/app/shared/constants/app-properties';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -48,12 +46,6 @@ export class LoginComponent extends BaseClass implements OnInit{
     });
   }
 
-
-  uploadMaster() {
-    this.commonRequestService.request(RequestEnums.UPLOAD_LOCATION_MASTER, {obj: JSON.stringify(LOCATION_MASTER)}).subscribe(res => {
-      console.log(res);
-    });
-  }
   openLoader() {
     this.loaderService.showLoader('loading sample 123....', SPINNER_TYPE.DOTS, true, 5000, true, '', true, true, true);
   }

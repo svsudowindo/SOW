@@ -10,8 +10,7 @@ var LocationMasterSchema = mongoose.Schema({
         required: true
     },
     locationName: {
-        type: String,
-        required: true
+        type: String
     },
     storeName: {
         type: String,
@@ -45,5 +44,8 @@ var LocationMasterSchema = mongoose.Schema({
 })
 
 var LocationMaster = mongoose.model('locationMaster', LocationMasterSchema);
-
-module.exports = LocationMaster;
+var Master = mongoose.model('master', LocationMasterSchema);
+module.exports = {
+    locationMaster: LocationMaster,
+    master: Master
+};

@@ -6,6 +6,8 @@ var MasterDAO = require('../controllers/auth/master/master.dao');
 
 authRoutes.post('/register', UserDAO.createUser);
 
-authRoutes.post('/upload/location-master', MasterDAO.bulkUploadLocationMaster)
+authRoutes.post('/upload/location-master', MasterDAO.bulkUploadLocationMaster);
+
+authRoutes.post('/upload/master', MasterDAO.bulkUploadMaster);
 
 exports.authRoutes = authRoutes;
