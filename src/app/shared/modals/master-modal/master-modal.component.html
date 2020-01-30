@@ -1,0 +1,17 @@
+<ion-toolbar color="primary">
+  <ion-buttons slot="secondary">
+    <ion-button (click)="closeModal()">
+      <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Licencee Numbers</ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <ion-searchbar type="number" showCancelButton="never"></ion-searchbar>
+  <ion-virtual-scroll [items]="licenseeList" approxItemHeight="320px">
+    <ion-item *virtualItem="let item;" (click)="selectedLicencee(item)">
+      {{item.licenseeNumber}}
+    </ion-item>
+    </ion-virtual-scroll>
+</ion-content>

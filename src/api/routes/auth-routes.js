@@ -10,4 +10,8 @@ authRoutes.post('/upload/location-master', MasterDAO.bulkUploadLocationMaster);
 
 authRoutes.post('/upload/master', MasterDAO.bulkUploadMaster);
 
+authRoutes.get('/location-master', MasterDAO.getLoctionMasterData);
+
+authRoutes.get('/master', MasterDAO.getMasterData);
+
 exports.authRoutes = authRoutes;

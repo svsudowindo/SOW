@@ -1,6 +1,91 @@
+<ion-toolbar color="primary">
+  <ion-title>Register</ion-title>
+</ion-toolbar>
+
 <ion-content>
   <div class="center m-t-20 w-p-100">
     <form [formGroup]="registerForm">
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Licensee Number <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="licenseeNumber" (ionFocus)="openLicenseeModal()"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
+        </div>
+      </div>
+
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Business Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="businessName" [readonly]="selectedFromLicenceeList"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'businessName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Location Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="locationName" [readonly]="selectedFromLicenceeList"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'locationName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'locationName')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Store Name <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="storeName" [readonly]="selectedFromLicenceeList"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'storeName')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'storeName')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 ">
+        <ion-item>
+          <ion-label position="floating">Address</ion-label>
+          <ion-textarea formControlName="address" [readonly]="selectedFromLicenceeList"></ion-textarea>
+        </ion-item>
+        <!-- <div [hidden]="!isValidField(registerForm, 'address')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'address')}}</p>
+        </div> -->
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">City <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="city" [readonly]="selectedFromLicenceeList"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'city')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'city')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">State <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="state" [readonly]="selectedFromLicenceeList"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'state')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'state')}}</p>
+        </div>
+      </div>
+
+      <div class="m-l-r-10 h-px-90">
+        <ion-item>
+          <ion-label position="floating">Zipcode <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="zipcode" [readonly]="selectedFromLicenceeList"></ion-input>
+        </ion-item>
+        <div [hidden]="!isValidField(registerForm, 'zipcode')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'zipcode')}}</p>
+        </div>
+      </div>
+
       <div class="m-l-r-10 h-px-90">
         <ion-item>
           <ion-label position="floating">First Name <span class="error">*</span></ion-label>
@@ -64,89 +149,10 @@
         </div>
       </div>
 
-      <div class="m-l-r-10 h-px-90">
-        <ion-item>
-          <ion-label position="floating">Licensee Number <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="licenseeNumber"></ion-input>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
-        </div>
-      </div>
-
-
-      <div class="m-l-r-10 h-px-90">
-        <ion-item>
-          <ion-label position="floating">Business Name <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="businessName"></ion-input>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'businessName')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
-        </div>
-      </div>
-
-      <div class="m-l-r-10 h-px-90">
-        <ion-item>
-          <ion-label position="floating">Location Name <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="locationName"></ion-input>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'locationName')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'locationName')}}</p>
-        </div>
-      </div>
-
-      <div class="m-l-r-10 h-px-90">
-        <ion-item>
-          <ion-label position="floating">Store Name <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="storeName"></ion-input>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'storeName')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'storeName')}}</p>
-        </div>
-      </div>
-
-      <div class="m-l-r-10 ">
-        <ion-item>
-          <ion-label position="floating">Address <span class="error">*</span></ion-label>
-          <ion-textarea formControlName="address"></ion-textarea>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'address')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'address')}}</p>
-        </div>
-      </div>
-
-      <div class="m-l-r-10 h-px-90">
-        <ion-item>
-          <ion-label position="floating">City <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="city"></ion-input>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'city')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'city')}}</p>
-        </div>
-      </div>
-
-      <div class="m-l-r-10 h-px-90">
-        <ion-item>
-          <ion-label position="floating">State <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="state"></ion-input>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'state')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'state')}}</p>
-        </div>
-      </div>
-
-      <div class="m-l-r-10 h-px-90">
-        <ion-item>
-          <ion-label position="floating">Zipcode <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="zipcode"></ion-input>
-        </ion-item>
-        <div [hidden]="!isValidField(registerForm, 'zipcode')">
-          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'zipcode')}}</p>
-        </div>
-      </div>
 
       <div class="m-l-r-10 m-t-10 m-b-10 ion-text-center">
-        <ion-button expand="block" fill="outline" [disabled]="registerForm.invalid" (click)="register()">Register</ion-button>
+        <ion-button expand="block" fill="outline" [disabled]="registerForm.invalid" (click)="register()">Register
+        </ion-button>
         <div class="m-t-10">
           <div class="ion-float-left">
             <a routerLink="/forgot-password">Forgot Password ?</a>

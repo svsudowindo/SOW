@@ -16,6 +16,18 @@ export const RequestEnums = {
         path: '/auth/upload/location-master',
         keys: [],
         values: []
+    },
+    GET_LOCATION_MASTER: {
+        type: 'GET',
+        path: '/auth/location-master',
+        keys: [],
+        values: []
+    },
+    GET_MASTER: {
+        type: 'GET',
+        path: '/auth/master',
+        keys: [],
+        values: []
     }
 };
 
