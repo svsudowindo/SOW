@@ -35,6 +35,9 @@ const routes: Routes = [
       },
       {
         path: 'registration',
+        data: {
+          self: true
+        },
         loadChildren: () => import('./views/auth-views/registration/registration.module').then(m => m.RegistrationModule)
       }
     ]
@@ -48,8 +51,15 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: './views/admin-views/dashboard/dashboard.module#DashboardModule',
-        canLoad: [CanLoadService] // Use when we want to make a disission to load sub modules or not
+        loadChildren: () => import('./views/admin-views/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'register-by-super-admin',
+        data: {
+          self: false,
+          title: 'Register'
+        },
+        loadChildren: () => import('./views/auth-views/registration/registration.module').then(m => m.RegistrationModule)
       }
     ]
   },

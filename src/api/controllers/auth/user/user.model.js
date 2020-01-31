@@ -1,51 +1,65 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var UserSchema = mongoose.Schema({
   firstName: {
-    type: String,
-    required: true
+    type: String
   },
   lastName: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   phoneNumber: {
     type: Number,
     required: true
   },
-  securityQuestion: {
+  userName: {
+    type: String,
+    default: ''
+  },
+  password: {
+    type: String,
+    default: ''
+  },
+  role: {
     type: String,
     required: true
   },
-  securityAnswer: {
-    type: String,
-    required: true
-  },
+  // securityQuestion: {
+  //   type: String,
+  //   required: true
+  // },
+  // securityAnswer: {
+  //   type: String,
+  //   required: true
+  // },
   licenseeNumber: {
-    type: String,
+    type: Number,
     required: true
   },
   businessName: {
     type: String,
     required: true
   },
-  shopName: {
+  locationName: {
+    type: String
+  },
+  storeName: {
     type: String,
     required: true
   },
   address: {
-    type: String,
-    required: true
+    type: String
   },
   city: {
     type: String,
     required: true
   },
-  GA: {
+  state: {
     type: String,
     required: true
   },
@@ -64,6 +78,7 @@ var UserSchema = mongoose.Schema({
   }
 })
 
+UserSchema.plugin(uniqueValidator);
 var User = mongoose.model('User', UserSchema);
 
 module.exports = User;

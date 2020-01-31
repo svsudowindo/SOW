@@ -30,7 +30,8 @@ export class LoginComponent extends BaseClass implements OnInit{
     private router: Router,
     private loaderService: LoaderService,
     public injector: Injector,
-    private commonRequestService: CommonRequestService
+    private commonRequestService: CommonRequestService,
+    private alertService: AlertService
     ) {
     super(injector);
   }
@@ -48,5 +49,21 @@ export class LoginComponent extends BaseClass implements OnInit{
 
   openLoader() {
     this.loaderService.showLoader('loading sample 123....', SPINNER_TYPE.DOTS, true, 5000, true, '', true, true, true);
+  }
+
+  login() {
+    console.log(this.loginForm.value);
+    const buttons: ButtonModel[] = [
+      {
+        text: 'ok'
+      }
+    ];
+    this.commonRequestService.request(RequestEnums.LOGIN, this.loginForm.value).subscribe(res => {
+      if (res.errors.length) {
+        this.alertService.openAlert('Error', '', res.errors[0], buttons).then(res => {});
+      } else {
+        this.router.navigate(['dashboard']);
+      }
+    })
   }
 }

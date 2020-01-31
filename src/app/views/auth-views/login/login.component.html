@@ -1,5 +1,5 @@
 <div class="center w-p-100">
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="m-l-r-10 h-px-90">
             <ion-item>
                 <ion-label position="floating">Username</ion-label>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="m-l-r-10 m-t-10 ion-text-center">
-            <ion-button expand="block" fill="outline">Login</ion-button>
+            <ion-button type="submit" expand="block" fill="outline">Login</ion-button>
 
             <div class="m-t-10">
                 <div class="ion-float-left">

@@ -2,14 +2,16 @@ import { Registration } from './registration.model';
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { BaseClass } from 'src/app/shared/services/common/baseClass';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, NavigationEnd, RouterEvent } from '@angular/router';
 import { LoaderService } from 'src/app/shared/services/common/loader/loader.service';
 import { CommonRequestService } from 'src/app/shared/services/http/common-request.service';
 import { RequestEnums } from 'src/app/shared/constants/request-enums';
 import { ModalController } from '@ionic/angular';
 import { MasterModalComponent } from 'src/app/shared/modals/master-modal/master-modal.component';
 import Utils from 'src/app/shared/services/common/utils';
-
+import { filter } from 'rxjs/operators';
+import { ROLES} from 'src/app/shared/constants/app-properties';
+import { AlertService, ButtonModel } from 'src/app/shared/services/common/alert/alert.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -21,6 +23,9 @@ export class RegistrationComponent extends BaseClass implements OnInit {
   licenseeList = [];
   selectedLicencee: any;
   selectedFromLicenceeList = false;
+  isSelfRegister = false;
+  ROLES_ENUM = ROLES;
+  selectedRole = ROLES.MASTER;
   validationMessages = {
     firstName: [
       { type: 'required', message: 'First Name is required' }
@@ -34,12 +39,12 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     phoneNumber: [
       { type: 'required', message: 'Phone Number is required' }
     ],
-    securityQuestion: [
-      { type: 'required', message: 'Security Question is required' }
-    ],
-    securityAnswer: [
-      { type: 'required', message: 'Security Answer is required' }
-    ],
+    // securityQuestion: [
+    //   { type: 'required', message: 'Security Question is required' }
+    // ],
+    // securityAnswer: [
+    //   { type: 'required', message: 'Security Answer is required' }
+    // ],
     licenseeNumber: [
       { type: 'required', message: 'Licensee Number is required' }
     ],
@@ -69,27 +74,35 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     private loaderService: LoaderService,
     public injector: Injector,
     private commonRequestService: CommonRequestService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private alertController: AlertService
   ) {
     super(injector);
-    this.getLocationMaster();
+    this.router.events.pipe(
+      filter(e => e instanceof RouterEvent)
+    ).subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        this.isSelfRegister = this.router.routerState.root.firstChild.firstChild.snapshot.data.self;
+      }
+    });
   }
 
   ngOnInit() {
     this.initLoginForm();
+    this.getMasterBasedOnRole();
   }
 
   initLoginForm() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.compose([Validators.required])],
-      lastName: ['', Validators.compose([Validators.required])],
+      firstName: [''],
+      lastName: [''],
       email: ['', Validators.compose([Validators.required])],
       phoneNumber: ['', Validators.compose([Validators.required])],
-      securityQuestion: ['', Validators.compose([Validators.required])],
-      securityAnswer: ['', Validators.compose([Validators.required])],
+      // securityQuestion: [''],
+      // securityAnswer: [''],
       licenseeNumber: ['', Validators.compose([Validators.required])],
       businessName: ['', Validators.compose([Validators.required])],
-      locationName: ['', Validators.compose([Validators.required])],
+      locationName: [''],
       storeName: ['', Validators.compose([Validators.required])],
       address: [''],
       city: ['', Validators.compose([Validators.required])],
@@ -98,11 +111,29 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     });
   }
 
+
+  /**
+   * Get Master info based on selected role
+   */
+  getMasterBasedOnRole() {
+    let request = RequestEnums.GET_LOCATION_MASTER;
+    switch(this.selectedRole) {
+      case this.ROLES_ENUM.MASTER: {
+        request = RequestEnums.GET_MASTER;
+        this.getMasterInfo(request);
+        break;
+      }
+      case this.ROLES_ENUM.LOCATION: {
+        this.getMasterInfo(request);
+        break;
+      }
+    }
+  }
   /**
    * Get Master Data
    */
-  private getLocationMaster() {
-    this.commonRequestService.request(RequestEnums.GET_LOCATION_MASTER).subscribe(res => {
+  private getMasterInfo(request) {
+    this.commonRequestService.request(request).subscribe(res => {
       this.licenseeList = res.data;
     })
   }
@@ -111,8 +142,19 @@ export class RegistrationComponent extends BaseClass implements OnInit {
    * Register a user
    */
   register() {
+    const postBody = this.registerForm.value;
+    postBody['role'] = this.selectedRole;
+    const buttons: ButtonModel[] = [
+      {
+        text: 'ok'
+      }
+    ]
     this.commonRequestService.request(RequestEnums.REGISTER_USER, this.registerForm.value).subscribe(res => {
-      console.log(res);
+      if (res.errors.length > 0) {
+        this.alertController.openAlert('Error', '', res.errors[0], buttons);
+      } else {
+        this.alertController.openAlert('Success', '', this.selectedRole.toLowerCase() + ' Created Successfully');
+      }
     });
   }
 
@@ -160,6 +202,5 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     this.registerForm.get('city').setValue(selectedItem.city);
     this.registerForm.get('state').setValue(selectedItem.state);
     this.registerForm.get('zipcode').setValue(selectedItem.zipcode);
-
   }
 }

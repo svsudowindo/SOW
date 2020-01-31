@@ -23,7 +23,7 @@ var mailOptions = {
 exports.sendMail = function (infoObject, subject, textOtherThanCredentials, sendCredentials) {
     mailOptions['to'] = infoObject.email;
     mailOptions['subject'] = subject;
-    mailOptions['text'] = textOtherThanCredentials + (sendCredentials ? ('\nUsername: ' + infoObject.email + '\nPassword: ' + infoObject.password + '\nCompanyID: ' + infoObject.companyID) : '' );
+    mailOptions['text'] = textOtherThanCredentials + (sendCredentials ? ('\nUsername: ' + infoObject.email + '\nPassword: ' + infoObject.password) : '' );
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
         } else {

@@ -28,6 +28,12 @@ export const RequestEnums = {
         path: '/auth/master',
         keys: [],
         values: []
+    },
+    LOGIN: {
+        type: 'POST',
+        path: '/auth/login',
+        keys: [],
+        values: []
     }
 };
 

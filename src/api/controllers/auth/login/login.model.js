@@ -1,15 +1,11 @@
 var mongoose = require('mongoose');
 
 var LoginSchema = mongoose.Schema({
-  email: {
+  userName: {
     type: String,
     required: true
   },
   password: {
-    type: String,
-    required: true
-  },
-  companyID: {
     type: String,
     required: true
   }

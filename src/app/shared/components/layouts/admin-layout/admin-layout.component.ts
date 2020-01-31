@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,19 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
+  title = '';
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
+      title: 'Register',
+      url: '/register-by-super-admin',
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Register',
+      url: '/register-by-super-admin',
+      icon: 'home'
+    },
+    {
+      title: 'Logout',
+      url: '/login',
+      icon: 'log-out'
     }
   ];
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(e => e instanceof RouterEvent)
+    ).subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        this.title = this.router.routerState.root.firstChild.firstChild.snapshot.data.title;
+      }
+    });
+  }
 
   ngOnInit() {
   }
