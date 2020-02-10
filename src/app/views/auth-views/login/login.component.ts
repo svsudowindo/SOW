@@ -17,7 +17,7 @@ export class LoginComponent extends BaseClass implements OnInit{
 
   loginForm: FormGroup;
   validationMessages = {
-    username: [
+    userName: [
       { type: 'required', message: 'Username is required'}
     ],
     password: [
@@ -42,7 +42,7 @@ export class LoginComponent extends BaseClass implements OnInit{
 
   initLoginForm() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.compose([Validators.required])],
+      userName: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required])]
     });
   }

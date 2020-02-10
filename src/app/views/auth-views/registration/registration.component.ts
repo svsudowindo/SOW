@@ -146,14 +146,14 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     postBody['role'] = this.selectedRole;
     const buttons: ButtonModel[] = [
       {
-        text: 'ok'
+        text: 'OK'
       }
-    ]
+    ];
     this.commonRequestService.request(RequestEnums.REGISTER_USER, this.registerForm.value).subscribe(res => {
       if (res.errors.length > 0) {
         this.alertController.openAlert('Error', '', res.errors[0], buttons);
       } else {
-        this.alertController.openAlert('Success', '', this.selectedRole.toLowerCase() + ' Created Successfully');
+        this.alertController.openAlert('Success', '', this.selectedRole.toLowerCase() + ' Created Successfully', buttons);
       }
     });
   }
