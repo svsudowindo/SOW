@@ -6,5 +6,6 @@ export const PROPERTIES = {
 export const ROLES = {
     MASTER: 'MASTER',
     TECHNICIAN: 'TECHNICIAN',
-    LOCATION: 'LOCATION'
+    LOCATION: 'LOCATION',
+    SUPER_ADMIN: 'SUPER_ADMIN'
 }

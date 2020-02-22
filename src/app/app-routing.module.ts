@@ -60,6 +60,13 @@ const routes: Routes = [
           title: 'Register'
         },
         loadChildren: () => import('./views/auth-views/registration/registration.module').then(m => m.RegistrationModule)
+      },
+      {
+        path: 'vendor-list',
+        data: {
+          title: 'Vendor'
+        },
+        loadChildren: () => import('./views/admin-views/vendor-list/vendor-list.module').then(m => m.VendorListModule)
       }
     ]
   },

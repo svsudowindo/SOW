@@ -34,6 +34,12 @@ export const RequestEnums = {
         path: '/auth/login',
         keys: [],
         values: []
+    },
+    GET_ROLES: {
+        type: 'GET',
+        path: '/auth/get-roles',
+        keys: [],
+        values: []
     }
 };
 

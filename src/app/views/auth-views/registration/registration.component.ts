@@ -25,6 +25,7 @@ export class RegistrationComponent extends BaseClass implements OnInit {
   selectedFromLicenceeList = false;
   isSelfRegister = false;
   ROLES_ENUM = ROLES;
+  roles = [];
   selectedRole = ROLES.MASTER;
   validationMessages = {
     firstName: [
@@ -78,6 +79,8 @@ export class RegistrationComponent extends BaseClass implements OnInit {
     private alertController: AlertService
   ) {
     super(injector);
+    console.log(localStorage.getItem('role'));
+    this.getRoles();
     this.router.events.pipe(
       filter(e => e instanceof RouterEvent)
     ).subscribe(e => {
@@ -108,6 +111,21 @@ export class RegistrationComponent extends BaseClass implements OnInit {
       city: ['', Validators.compose([Validators.required])],
       state: ['', Validators.compose([Validators.required])],
       zipcode: ['', Validators.compose([Validators.required])],
+    });
+  }
+
+  getRoles() {
+    this.commonRequestService.request(RequestEnums.GET_ROLES).subscribe(res => {
+      if (res.errors.length > 0) {
+
+      } else if (Utils.isValidInput(res.data)) {
+        const roles = res.data;
+        const index = roles.findIndex(obj => obj.role_id === 1);
+        if (index !== -1) {
+          roles.splice(index, 1);
+        }
+        this.roles = roles;
+      }
     });
   }
 
@@ -153,7 +171,9 @@ export class RegistrationComponent extends BaseClass implements OnInit {
       if (res.errors.length > 0) {
         this.alertController.openAlert('Error', '', res.errors[0], buttons);
       } else {
-        this.alertController.openAlert('Success', '', this.selectedRole.toLowerCase() + ' Created Successfully', buttons);
+        this.alertController.openAlert('Success', '', this.selectedRole.toLowerCase() + ' Created Successfully', buttons).then(res => {
+          this.router.navigate(['dashboard']);
+        });
       }
     });
   }

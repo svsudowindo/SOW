@@ -62,8 +62,11 @@ export class LoginComponent extends BaseClass implements OnInit{
       if (res.errors.length) {
         this.alertService.openAlert('Error', '', res.errors[0], buttons).then(res => {});
       } else {
+        console.log(res);
+        localStorage.setItem('role', res.data.role);
+        localStorage.setItem('id', res.data._id);
         this.router.navigate(['dashboard']);
       }
-    })
+    });
   }
 }

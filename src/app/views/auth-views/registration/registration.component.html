@@ -8,9 +8,9 @@
       <ion-item>
         <ion-label position="floating">Select Role<span class="error">*</span></ion-label>
         <ion-select [(ngModel)]="selectedRole" (ionChange)="getMasterBasedOnRole()">
-          <ion-select-option [value]="ROLES_ENUM.MASTER">MASTER</ion-select-option>
-          <ion-select-option [value]="ROLES_ENUM.TECHNICIAN">TECHNICIAN</ion-select-option>
-          <ion-select-option [value]="ROLES_ENUM.LOCATION">LOCATION</ion-select-option>
+          <ng-container *ngFor="let role of roles">
+          <ion-select-option [value]="role.name">{{role.name}}</ion-select-option>
+        </ng-container>
         </ion-select>
       </ion-item>
     </div>
