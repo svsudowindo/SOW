@@ -1,8 +1,11 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Add Cabinet</ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-button color="primary" (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Add Cabinet</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="dismissModal()">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -53,7 +56,8 @@
       <ion-item>
         <ion-label position="floating">Add Bill Acceptor <span class="error">*</span></ion-label>
         <ion-input type="text" [(ngModel)]="billAcceptor"></ion-input>
-        <ion-icon class="suffix-icon" color="primary" name="add-circle-outline" slot="end" (click)="addBillAcceptor()"></ion-icon>
+        <ion-icon class="suffix-icon" color="primary" name="add-circle-outline" slot="end" (click)="addBillAcceptor()">
+        </ion-icon>
       </ion-item>
       <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
         <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
@@ -75,7 +79,7 @@
       </div>
     </ng-container>
     <div class="ion-text-center m-t-10">
-    <ion-button color="primary" expand="round">Add Cabinet</ion-button>
-  </div>
+      <ion-button color="primary" expand="round">Add Cabinet</ion-button>
+    </div>
   </div>
 </ion-content>

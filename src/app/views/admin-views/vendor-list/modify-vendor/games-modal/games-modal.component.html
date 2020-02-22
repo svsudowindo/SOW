@@ -1,3 +1,51 @@
-<p>
-  games-modal works!
-</p>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Add Games</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="dismissModal()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="center m-t-20 w-p-100">
+    <div class="m-l-r-10 h-px-90">
+      <ion-item>
+        <ion-label position="floating">Game Name <span class="error">*</span></ion-label>
+        <ion-input type="text" [(ngModel)]="gameDetails.name"></ion-input>
+      </ion-item>
+      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
+        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
+      </div> -->
+    </div>
+    <div class="m-l-r-10 h-px-90">
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea [(ngModel)]="gameDetails.description"></ion-textarea>
+      </ion-item>
+      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
+        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
+      </div> -->
+    </div>
+
+    <div class="ion-text-center m-t-10">
+      <ion-button color="primary" expand="round" (click)="addGame()">Add Game</ion-button>
+    </div>
+
+    <div class="m-t-10">
+      <ng-container *ngIf="gameList.length > 0">
+        <ng-container *ngFor="let game of gameList">
+        <ion-item>
+          <ion-label>
+            <p class="gameName">{{game.name}}</p>
+            <p>{{game.description}}</p>
+          </ion-label>
+        </ion-item>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</ion-content>

@@ -1,3 +1,4 @@
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,9 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./games-modal.component.scss'],
 })
 export class GamesModalComponent implements OnInit {
+  gameList = [];
 
-  constructor() { }
+  gameDetails = {
+    name: '',
+    description: ''
+  }
+  constructor(
+    private modalController: ModalController
+  ) { }
 
   ngOnInit() {}
 
+  dismissModal() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }
+
+  addGame() {
+    this.gameList.push(this.gameDetails);
+    this.gameDetails = {
+      name: '',
+      description: ''
+    }
+  }
 }
