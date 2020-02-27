@@ -67,6 +67,10 @@ var UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  authToken: {
+    type: String,
+    required: true
+  },
   createDate: {
     type: Date,
     default: (new Date()).getMilliseconds()

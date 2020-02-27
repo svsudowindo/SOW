@@ -452,4 +452,13 @@ export default class Utils {
  static avoidShallowClone(input) {
   return JSON.parse(JSON.stringify(input));
 }
+
+  // get isObject or not
+  static getIsObject(input: any) {
+    if (typeof (input) !== 'string' && typeof (input) !== 'number' && typeof (input) !== 'boolean') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

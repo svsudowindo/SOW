@@ -1,3 +1,4 @@
+import { LocalStorageEnums } from './../../../shared/constants/localstorage-enums';
 import { Component, OnInit, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonRequestService } from '../../../shared/services/http/common-request.service';
@@ -31,7 +32,8 @@ export class LoginComponent extends BaseClass implements OnInit{
     private loaderService: LoaderService,
     public injector: Injector,
     private commonRequestService: CommonRequestService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private storageService: StorageService
     ) {
     super(injector);
   }
@@ -63,8 +65,9 @@ export class LoginComponent extends BaseClass implements OnInit{
         this.alertService.openAlert('Error', '', res.errors[0], buttons).then(res => {});
       } else {
         console.log(res);
-        localStorage.setItem('role', res.data.role);
-        localStorage.setItem('id', res.data._id);
+        this.storageService.setLocalStorageItem(LocalStorageEnums.TOKEN, res.data.authToken);
+        this.storageService.setLocalStorageItem(LocalStorageEnums.USER_ID, res.data._id);
+        this.storageService.setLocalStorageItem(LocalStorageEnums.ROLE_NAME, res.data.role);
         this.router.navigate(['dashboard']);
       }
     });

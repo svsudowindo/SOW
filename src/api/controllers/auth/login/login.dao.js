@@ -3,9 +3,7 @@ var User = require('../user/user.model');
 var Utils = require('../../../common/services/utils');
 exports.login = (req, res, next) => {
   var payload = req.body;
-  console.log(payload);
-  User.find({ userName: payload.userName, password: payload.password }, (loginErr, loginResult) => {
-    console.log(loginResult)
+  User.find({ userName: payload.userName, password: payload.password}, (loginErr, loginResult) => {
     if (loginErr) {
       return res.send(Utils.sendResponse(500, null, ['Unable to fetch Users. Please try again...'], 'Unable to fetch Users. Please try again...'));
     }
