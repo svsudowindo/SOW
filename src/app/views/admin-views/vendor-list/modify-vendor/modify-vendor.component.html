@@ -2,21 +2,34 @@
 </ion-toolbar>
 <ion-content>
   <div class="center m-t-20 w-p-100">
+    <form [formGroup]="vendorForm">
     <div class="m-l-r-10 h-px-90">
       <ion-item>
-        <ion-label position="floating">Vendor Name <span class="error">*</span></ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-label position="floating">Manufacturer Name <span class="error">*</span></ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
-      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
-        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
-      </div> -->
+      <div [hidden]="!isValidField(vendorForm, 'name')">
+        <p class="error height-match">{{getErrorMessage(vendorForm, validationMessages, 'name')}}</p>
+      </div>
     </div>
+
+    <div class="m-l-r-10 h-px-90">
+      <ion-item>
+        <ion-label position="floating">Manufacturer Email<span class="error">*</span></ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+      <div [hidden]="!isValidField(vendorForm, 'email')">
+        <p class="error height-match">{{getErrorMessage(vendorForm, validationMessages, 'email')}}</p>
+      </div>
+    </div>
+
     <div class="ion-text-center">
       <ion-button expand="round" fill="outline" (click)="openCabinetModal()">Add Cabinet ({{cabinetList.length}})</ion-button>
       <ion-button expand="round" fill="outline" (click)="openGamesModal()">Add Games ({{gamesList.length}})</ion-button>
     </div>
     <div class="ion-text-center m-t-20">
-      <ion-button expand="round">Save Vendor</ion-button>
+      <ion-button expand="round" [disabled]="vendorForm.invalid" (click)="saveVendor()">Save Vendor</ion-button>
     </div>
+  </form>
   </div>
 </ion-content>

@@ -17,7 +17,7 @@ export class HeaderInterceptorsService {
     };
     const authToken = this.storageService.getLocalStorageItem(LocalStorageEnums.TOKEN);
     if (authToken) {
-      defaultHeaders['Authorization'] = 'Bearer ' + authToken;
+      defaultHeaders['Authorization'] = authToken;
     }
     if (req.headers.keys().length > 0) {   // This replaces default headers if any headers passed at the request time
       req.headers.keys().forEach((headerKey) => {

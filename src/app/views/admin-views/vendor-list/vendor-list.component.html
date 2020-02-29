@@ -3,9 +3,8 @@
 <ion-content>
   <div>
     <div class="ion-text-end">
-      <ion-button expand="round" fill="outline" (click)="addVendor()">Add Vendor</ion-button>
+      <ion-button expand="round" fill="outline" (click)="addVendor()">Add Manufacturer</ion-button>
     </div>
-  
     <ng-container *ngIf="vendorsList.length <= 0"> 
       <div class="ion-text-center">
         <p class="m-b-0">No records</p>
@@ -15,11 +14,16 @@
       <ion-list>
         <ng-container *ngFor="let vendor of vendorsList">
           <ion-item>
-            <ion-label>Pokémon Yellow</ion-label>
+            <ion-label>
+              <p style="font-size: 22px;">{{vendor.name}}</p>
+            </ion-label>
+            <div class="ion-text-end">
+              <div>Cabinets - {{vendor.cabinets.length}}</div>
+              <div>Games - {{vendor.games.length}}</div>
+            </div>
           </ion-item>
         </ng-container>
       </ion-list>
     </ng-container>
-    
   </div>
 </ion-content>

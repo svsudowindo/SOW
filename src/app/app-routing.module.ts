@@ -64,7 +64,7 @@ const routes: Routes = [
       {
         path: 'vendor-list',
         data: {
-          title: 'Vendor'
+          title: 'Manufacturer'
         },
         loadChildren: () => import('./views/admin-views/vendor-list/vendor-list.module').then(m => m.VendorListModule)
       }

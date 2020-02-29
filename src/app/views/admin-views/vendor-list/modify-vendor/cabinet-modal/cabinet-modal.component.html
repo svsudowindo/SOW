@@ -5,71 +5,91 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Add Cabinet</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="primary" (click)="dismissModal()">Save</ion-button>
+      <ion-button color="primary" (click)="saveModal()" [disabled]="cabinetsList.length <= 0">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+  <ion-content>
+    <div class="center m-t-20 w-p-100 m-b-40">
+      <form [formGroup]="cabinetForm">
+        <div>
+          <div class="m-l-r-10 h-px-90">
+            <ion-item>
+              <ion-label position="floating">Cabinet Name <span class="error">*</span></ion-label>
+              <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+            <div [hidden]="!isValidField(cabinetForm, 'name')">
+              <p class="error height-match">
+                {{getErrorMessage(cabinetForm, validationMessages, 'name')}}</p>
+            </div>
+          </div>
 
-<ion-content>
-  <div class="center m-t-20 w-p-100">
-    <div class="m-l-r-10 h-px-90">
-      <ion-item>
-        <ion-label position="floating">Cabinet Name <span class="error">*</span></ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
+          <div class="m-l-r-10 h-px-90">
+            <ion-item>
+              <ion-label position="floating">Size</ion-label>
+              <ion-input type="text" formControlName="size"></ion-input>
+            </ion-item>
+            <!-- <div [hidden]="!isValidField(getCabinetArray()['controls'][i], 'size')">
+                <p class="error height-match">
+                  {{getErrorMessage(getCabinetArray()['controls'][i], validationMessages, 'size')}}</p>
+              </div> -->
+          </div>
+
+          <div class="m-l-r-10 h-px-90">
+            <ion-item>
+              <ion-label position="floating">Monitor Type</ion-label>
+              <ion-input type="text" formControlName="monitorType"></ion-input>
+            </ion-item>
+            <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
         <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
       </div> -->
-    </div>
+          </div>
 
-    <div class="m-l-r-10 h-px-90">
-      <ion-item>
-        <ion-label position="floating">Size</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
-        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
-      </div> -->
-    </div>
+          <div class="m-l-r-10 h-px-90">
+            <ion-item>
+              <ion-label position="floating">Add Bill Acceptor <span class="error">*</span></ion-label>
+              <ion-input type="text" formControlName="billAcceptor"></ion-input>
+              <ion-icon class="suffix-icon" color="primary" name="add-circle-outline" slot="end"
+                (click)="addBillAcceptor(i)">
+              </ion-icon>
+            </ion-item>
+            <!-- <div [hidden]="!isValidField(cabinetForm, 'billAcceptor')">
+            <p class="error height-match">{{getErrorMessage(cabinetForm, validationMessages, 'billAcceptor')}}</p>
+          </div> -->
+          </div>
+          <ng-container *ngIf="billAcceptorList.length > 0">
+            <div class="ion-text-center">
+              Bill Acceptor List
+            </div>
+            <ion-list>
+              <ion-item *ngFor="let billAcceptor of billAcceptorList">
+                <ion-label>{{billAcceptor.name}}</ion-label>
+              </ion-item>
+            </ion-list>
+          </ng-container>
+          <ng-container *ngIf="billAcceptorList.length <= 0">
+            <div class="ion-text-center">
+              No bill acceptor
+            </div>
+          </ng-container>
+          <div class="ion-text-center m-t-10">
+            <ion-button color="primary" expand="round" [disabled]="cabinetForm.invalid || billAcceptorList.length <= 0"
+              (click)="addCabinet()">Add Cabinet</ion-button>
+          </div>
+        </div>
+      </form>
 
-    <div class="m-l-r-10 h-px-90">
-      <ion-item>
-        <ion-label position="floating">Monitor Type</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
-        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
-      </div> -->
-    </div>
-
-    <div class="m-l-r-10 h-px-90">
-      <ion-item>
-        <ion-label position="floating">Add Bill Acceptor <span class="error">*</span></ion-label>
-        <ion-input type="text" [(ngModel)]="billAcceptor"></ion-input>
-        <ion-icon class="suffix-icon" color="primary" name="add-circle-outline" slot="end" (click)="addBillAcceptor()">
-        </ion-icon>
-      </ion-item>
-      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
-        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
-      </div> -->
-    </div>
-    <ng-container *ngIf="billAcceptorList.length > 0">
-      <div class="ion-text-center">
-        Bill Acceptor List
+      <div *ngIf="cabinetsList.length <= 0" class="ion-text-center">
+        No Cabinets Available
       </div>
-      <ion-list>
-        <ion-item *ngFor="let billAcceptor of billAcceptorList">
-          <ion-label>{{billAcceptor}}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ng-container>
-    <ng-container *ngIf="billAcceptorList.length <= 0">
-      <div class="ion-text-center">
-        No bill acceptor
+
+
+      <div *ngIf="cabinetsList.length > 0">
+        <ion-list>
+          <ion-item *ngFor="let cabinet of cabinetsList">
+            <ion-label>{{cabinet.name}}</ion-label>
+          </ion-item>
+        </ion-list>
       </div>
-    </ng-container>
-    <div class="ion-text-center m-t-10">
-      <ion-button color="primary" expand="round">Add Cabinet</ion-button>
     </div>
-  </div>
-</ion-content>
+  </ion-content>

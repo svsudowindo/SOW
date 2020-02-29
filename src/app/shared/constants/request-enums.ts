@@ -40,6 +40,18 @@ export const RequestEnums = {
         path: '/auth/get-roles',
         keys: [],
         values: []
-    }
+    },
+    GET_MANUFACTURERS: {
+        type: 'GET',
+        path: '/admin/get-manufacturer',
+        keys: [],
+        values: []
+    },
+    POST_MANUFACTURERS: {
+        type: 'POST',
+        path: '/admin/create-manufacturer',
+        keys: [],
+        values: []
+    },
 };
 

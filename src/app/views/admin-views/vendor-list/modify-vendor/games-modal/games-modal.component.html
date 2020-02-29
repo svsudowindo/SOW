@@ -5,30 +5,28 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Add Games</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="primary" (click)="dismissModal()">Save</ion-button>
+      <ion-button color="primary" (click)="saveModal()" [disabled]="gameList.length <= 0">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="center m-t-20 w-p-100">
+    <form [formGroup]="gameForm">
     <div class="m-l-r-10 h-px-90">
       <ion-item>
         <ion-label position="floating">Game Name <span class="error">*</span></ion-label>
-        <ion-input type="text" [(ngModel)]="gameDetails.name"></ion-input>
+        <ion-input type="text" formControlName="name"></ion-input>
       </ion-item>
-      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
-        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
-      </div> -->
+      <div [hidden]="!isValidField(gameForm, 'name')">
+        <p class="error height-match">{{getErrorMessage(gameForm, validationMessages, 'name')}}</p>
+      </div>
     </div>
     <div class="m-l-r-10 h-px-90">
       <ion-item>
         <ion-label position="floating">Description</ion-label>
-        <ion-textarea [(ngModel)]="gameDetails.description"></ion-textarea>
+        <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
-      <!-- <div [hidden]="!isValidField(registerForm, 'businessName')">
-        <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'businessName')}}</p>
-      </div> -->
     </div>
 
     <div class="ion-text-center m-t-10">
@@ -47,5 +45,7 @@
         </ng-container>
       </ng-container>
     </div>
+  </form>
+
   </div>
 </ion-content>
