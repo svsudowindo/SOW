@@ -51,3 +51,12 @@
         width: 140px;
     }
 }
+
+
+ion-button.button-outline.ion-activatable  {
+    --border-color:  linear-gradient(90deg, #08567b, #032b45);;
+    --background: transparent;
+    --color:  linear-gradient(90deg, #08567b, #032b45);;
+    --color-focused:  linear-gradient(90deg, #08567b, #032b45);
+    
+}

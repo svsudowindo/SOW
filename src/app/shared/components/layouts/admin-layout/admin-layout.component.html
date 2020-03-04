@@ -1,13 +1,13 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar class="toolbar">
       <ion-title>{{title}}</ion-title>
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-menu contentId="content1" side="start">
+  <ion-menu contentId="content1" side="start"  class="side-menu" swipe-gesture="true" menu-type-push>
     <ion-content>
       <ion-list>
         <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
