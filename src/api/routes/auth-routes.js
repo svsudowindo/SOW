@@ -24,4 +24,6 @@ authRoutes.get('/get-roles', RolesDAO.getRoles);
 
 authRoutes.post('/get-role-id', RolesDAO.getRoleById);
 
+authRoutes.post('/get-users-by-role', UserDAO.getUsersByRole);
+
 exports.authRoutes = authRoutes;

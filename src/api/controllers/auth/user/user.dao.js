@@ -74,3 +74,30 @@ exports.saveUser = (req, res, next) => {
     })
   })
 }
+
+
+/**
+ * Get Users by role if only super admin
+ */
+
+exports.getUsersByRole = (req, res, next) => {
+  const payload = req.body;
+  if (payload.loggedInRole === 'SUPER_ADMIN') {
+    User.find({role: payload.role}, (userError, userList) => {
+      if (userError) {
+        return res.send(Utils.sendResponse(500, null, [`Unable to get the  ${payload.role} Information... Please try again later`], `Unable to get the  ${payload.role} Information... Please try again later`));
+      }
+      if (userList.length <= 0) {
+        return res.send(Utils.sendResponse(200, [], [], `No  ${payload.role} found ... `));
+      }
+      const filterdUserList = JSON.parse(JSON.stringify(userList)).map(obj => {
+        delete obj.password;
+        delete obj.authToken;
+        return obj;
+      });
+      return res.send(Utils.sendResponse(200, filterdUserList, [], `${payload.role} Information Fetched Successfully`));
+    })
+  } else {
+    return res.send(Utils.sendResponse(401, null, ['Unauthorized User ... Please Try with an authorized User'], 'Unauthorized User ... Please Try with an authorized User'));
+  }
+}
