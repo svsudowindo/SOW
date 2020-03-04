@@ -1,0 +1,22 @@
+{
+    "roles": [{
+            "name": "SUPER_ADMIN",
+            "role_id": 1
+        },
+
+        {
+            "name": "MASTER",
+            "role_id": 2
+        },
+
+        {
+            "name": "LOCATION",
+            "role_id": 3
+        },
+
+        {
+            "name": "TECHNICIAN",
+            "role_id": 4
+        }
+    ]
+}

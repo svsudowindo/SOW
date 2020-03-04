@@ -5,9 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import master from '../assets/master.json';
 import locationMaster from '../assets/location.json';
+import rolesMaster from '../assets/roles.json';
 import { RequestEnums } from './shared/constants/request-enums';
 import { CommonRequestService } from './shared/services/http/common-request.service';
 import { AlertService, ButtonModel } from './shared/services/common/alert/alert.service';
+import { forkJoin } from 'rxjs';
 
 
 
@@ -66,6 +68,28 @@ export class AppComponent {
         this.alertService.openAlert('Error', '', 'Successfully uploaded master data', buttons).then(alertRes => {
         });
       }
+    });
+  }
+
+  uploadRoles() {
+    const buttons: ButtonModel[] = [
+      {
+        text: 'Ok',
+        dismissMessage: 'ok'
+      }
+    ];
+    forkJoin([
+      this.commonRequestService.request(RequestEnums.UPLOAD_ROLES, rolesMaster.roles[0]),
+      this.commonRequestService.request(RequestEnums.UPLOAD_ROLES, rolesMaster.roles[1]),
+      this.commonRequestService.request(RequestEnums.UPLOAD_ROLES, rolesMaster.roles[2]),
+      this.commonRequestService.request(RequestEnums.UPLOAD_ROLES, rolesMaster.roles[3])]).subscribe(res => {
+      if (res) {
+        this.alertService.openAlert('Error', '', 'Successfully Created Roles', buttons).then(alertRes => {
+        });
+      }
+    }, error => {
+      console.log(error);
+      this.alertService.openAlert('Error', '', 'Successfully Created Roles', buttons).then(alertRes => {});
     });
   }
 }

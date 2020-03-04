@@ -17,6 +17,12 @@ export const RequestEnums = {
         keys: [],
         values: []
     },
+    UPLOAD_ROLES: {
+        type: 'POST',
+        path: '/auth/create-roles',
+        keys: [],
+        values: []
+    },
     GET_LOCATION_MASTER: {
         type: 'GET',
         path: '/auth/location-master',
