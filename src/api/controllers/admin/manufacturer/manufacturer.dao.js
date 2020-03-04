@@ -1,5 +1,9 @@
 var ManufacturerModal = require('./manufacturer.model');
 var Utils = require('./../../../common/services/utils');
+
+/**
+ * Create a manufacturer
+ */
 exports.createManufacturer = (req, res, next) => {
     const payload = req.body;
     ManufacturerModal.find({email: payload.email}, (manufacturerError, manufacturerResult) => {
@@ -27,6 +31,10 @@ exports.createManufacturer = (req, res, next) => {
     })
 }
 
+
+/**
+ * Get All Manufacturer 
+ */
 exports.getAllManufacturer = (req, res, next) => {
     ManufacturerModal.find({}, (getManufacturerError, getManufacturerResult) => {
         if (getManufacturerError) {
@@ -38,6 +46,9 @@ exports.getAllManufacturer = (req, res, next) => {
     })
 }
 
+/**
+ * Get Manufacturer by using manufacturer ID
+ */
 exports.getAllManufacturerByID = (req, res, next) => {
     const manufacturerID = req.params.id;
     ManufacturerModal.find({_id: manufacturerID}, (manufactureError, manufactureResult) => {
@@ -51,7 +62,9 @@ exports.getAllManufacturerByID = (req, res, next) => {
     })
 }
 
-
+/**
+ * Get List of Cabinets by manufacturer ID
+ */
 exports.getCabinetsByManufacturerID = (req, res, next) => {
     const manufacturerID = req.params.id;
     ManufacturerModal.find({_id: manufacturerID}, (manufactureError, manufactureResult) => {
@@ -72,6 +85,9 @@ exports.getCabinetsByManufacturerID = (req, res, next) => {
 }
 
 
+/**
+ * Get List of Games by manufacturer ID
+ */
 exports.getGamesByManufacturerID = (req, res, next) => {
     const manufacturerID = req.params.id;
     ManufacturerModal.find({_id: manufacturerID}, (manufactureError, manufactureResult) => {
@@ -91,6 +107,9 @@ exports.getGamesByManufacturerID = (req, res, next) => {
     })
 }
 
+/**
+ * Update Manufacturer by manufacturer ID and Manufacturer Email
+ */
 exports.updateManufacturer = (req, res, next) => {
     const payload = req.body;
     console.log(payload._id);
@@ -105,7 +124,6 @@ exports.updateManufacturer = (req, res, next) => {
             if (updateError) {
                 return res.send(Utils.sendResponse(500, null, ['Something went wrong while Updating Manufatcurer... Please try again'], 'Something went wrong while  Updating Manufatcurer... Please try again')); 
             }
-            console.log('result', updateResult);
             if (updateResult.nModified === 1) {
                 return res.send(Utils.sendResponse(200, payload, [], 'Manufacturer Updated Successfully')); 
             } else {
