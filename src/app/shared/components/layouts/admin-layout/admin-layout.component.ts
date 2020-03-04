@@ -17,11 +17,6 @@ export class AdminLayoutComponent implements OnInit {
       icon: 'home'
     },
     {
-      title: 'Register',
-      url: '/register-by-super-admin',
-      icon: 'home'
-    },
-    {
       title: 'Manufacturer',
       url: '/vendor-list',
       icon: 'home'
