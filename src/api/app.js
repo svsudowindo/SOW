@@ -19,7 +19,6 @@ app.use(bodyParser.json({limit: '50mb'}));
 
 app.use('/auth', authRoutes.authRoutes);
 app.use('/admin', function(req, res, next) {
-  console.log(req.get('Authorization'));
     const authToken = req.get('Authorization');
     User.find({authToken: authToken}, (userError, userResult) => {
         if (userError) {

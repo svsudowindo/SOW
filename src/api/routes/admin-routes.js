@@ -13,4 +13,7 @@ adminRoutes.get('/get-cabinets-by-manufacturer-id/:id', manufacturerDAO.getCabin
 
 adminRoutes.get('/get-games-by-manufacturer-id/:id', manufacturerDAO.getGamesByManufacturerID);
 
+adminRoutes.post('/update-manufacturer', manufacturerDAO.updateManufacturer);
+
+
 exports.adminRoutes = adminRoutes;

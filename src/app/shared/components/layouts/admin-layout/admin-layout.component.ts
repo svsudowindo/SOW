@@ -22,7 +22,7 @@ export class AdminLayoutComponent implements OnInit {
       icon: 'home'
     },
     {
-      title: 'Vendors',
+      title: 'Manufacturer',
       url: '/vendor-list',
       icon: 'home'
     },

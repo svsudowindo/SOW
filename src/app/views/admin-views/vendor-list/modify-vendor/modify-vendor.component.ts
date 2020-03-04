@@ -37,9 +37,6 @@ export class ModifyVendorComponent extends BaseClass {
     private navController: NavController
   ) {
     super(injector);
-  }
-
-  ionViewDidEnter() {
     this.createVendor();
   }
 
@@ -57,6 +54,7 @@ export class ModifyVendorComponent extends BaseClass {
       component: CabinetModalComponent
     });
     modal.onDidDismiss().then(res => {
+      this.cabinetList = res.data;
       this.vendorForm.get('cabinets').setValue(res.data);
     });
     return await modal.present();
@@ -67,6 +65,7 @@ export class ModifyVendorComponent extends BaseClass {
       component: GamesModalComponent
     });
     modal.onDidDismiss().then(res => {
+      this.gamesList = res.data;
       this.vendorForm.get('games').setValue(res.data);
     });
     return await modal.present();

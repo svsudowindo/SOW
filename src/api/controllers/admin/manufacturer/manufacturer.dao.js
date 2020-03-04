@@ -40,13 +40,12 @@ exports.getAllManufacturer = (req, res, next) => {
 
 exports.getAllManufacturerByID = (req, res, next) => {
     const manufacturerID = req.params.id;
-    console.log(manufacturerID);
     ManufacturerModal.find({_id: manufacturerID}, (manufactureError, manufactureResult) => {
         if (manufactureError) {
             return res.send(Utils.sendResponse(500, null, ['Something went wrong while fetching Manufatcurer... Please try again'], 'Something went wrong while fetching Manufatcurer... Please try again')); 
         }
         if (manufactureResult.length <= 0) {
-            return res.send(Utils.sendResponse(500, null, ['No manufacturer exist'], 'No manufacturer exist')); 
+            return res.send(Utils.sendResponse(400, null, ['No manufacturer exist'], 'No manufacturer exist')); 
         }
         return res.send(Utils.sendResponse(500, manufactureResult, [], 'Manufacturer Details Fetched Successfully')); 
     })
@@ -60,7 +59,7 @@ exports.getCabinetsByManufacturerID = (req, res, next) => {
             return res.send(Utils.sendResponse(500, null, ['Something went wrong while fetching Manufatcurer... Please try again'], 'Something went wrong while fetching Manufatcurer... Please try again')); 
         }
         if (manufactureResult.length <= 0) {
-            return res.send(Utils.sendResponse(500, null, ['No manufacturer exist'], 'No manufacturer exist')); 
+            return res.send(Utils.sendResponse(400, null, ['No manufacturer exist'], 'No manufacturer exist')); 
         }
         const obj = {
             id: manufactureResult[0]._id,
@@ -80,7 +79,7 @@ exports.getGamesByManufacturerID = (req, res, next) => {
             return res.send(Utils.sendResponse(500, null, ['Something went wrong while fetching Manufatcurer... Please try again'], 'Something went wrong while fetching Manufatcurer... Please try again')); 
         }
         if (manufactureResult.length <= 0) {
-            return res.send(Utils.sendResponse(500, null, ['No manufacturer exist'], 'No manufacturer exist')); 
+            return res.send(Utils.sendResponse(400, null, ['No manufacturer exist'], 'No manufacturer exist')); 
         }
         const obj = {
             id: manufactureResult[0]._id,
@@ -89,5 +88,29 @@ exports.getGamesByManufacturerID = (req, res, next) => {
             games: manufactureResult[0].games
         }
         return res.send(Utils.sendResponse(500, obj, [], 'Manufacturer Details Fetched Successfully')); 
+    })
+}
+
+exports.updateManufacturer = (req, res, next) => {
+    const payload = req.body;
+    console.log(payload._id);
+    ManufacturerModal.find({_id: payload._id}, (manufactureError, manufactureResult) => {
+        if (manufactureError) {
+            return res.send(Utils.sendResponse(500, null, ['Something went wrong while fetching Manufatcurer... Please try again'], 'Something went wrong while fetching Manufatcurer... Please try again')); 
+        }
+        if (manufactureResult.length <= 0) {
+            return res.send(Utils.sendResponse(400, null, ['No manufacturer exist'], 'No manufacturer exist')); 
+        }
+        ManufacturerModal.updateOne({_id: payload._id, email: payload.email}, payload, (updateError, updateResult) => {
+            if (updateError) {
+                return res.send(Utils.sendResponse(500, null, ['Something went wrong while Updating Manufatcurer... Please try again'], 'Something went wrong while  Updating Manufatcurer... Please try again')); 
+            }
+            console.log('result', updateResult);
+            if (updateResult.nModified === 1) {
+                return res.send(Utils.sendResponse(200, payload, [], 'Manufacturer Updated Successfully')); 
+            } else {
+                return res.send(Utils.sendResponse(500, null, ['Something went wrong while Updating Manufatcurer... Please try again'], 'Something went wrong while  Updating Manufatcurer... Please try again')); 
+            }
+        })
     })
 }
