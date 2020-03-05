@@ -112,7 +112,6 @@ exports.getGamesByManufacturerID = (req, res, next) => {
  */
 exports.updateManufacturer = (req, res, next) => {
     const payload = req.body;
-    console.log(payload._id);
     ManufacturerModal.find({_id: payload._id}, (manufactureError, manufactureResult) => {
         if (manufactureError) {
             return res.send(Utils.sendResponse(500, null, ['Something went wrong while fetching Manufatcurer... Please try again'], 'Something went wrong while fetching Manufatcurer... Please try again')); 
