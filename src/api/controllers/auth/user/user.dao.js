@@ -14,7 +14,38 @@ exports.createUser = (req, res, next) => {
     case ROLES.LOCATION: {
       this.locationCheck(req, res, next);
     }
+    case ROLES.SUPER_ADMIN: {
+      this.superAdminCheck(req, res, next);
+    }
   }
+}
+
+exports.superAdminCheck = (req, res, next) => {
+  let payload = req.body;
+  var user = new User(payload);
+  User.find({ role: payload.role }, (userError, usersList) => {
+    if (usersList.length > 0) {
+      return res.send(Utils.sendResponse(200, usersList[0], [], 'Super admin exist already.. Please Use the credentials'));
+    }
+    user.userName = payload.userName;
+    user.password = payload.password;
+    user.authToken = "admin1234567890";
+
+    user.save((userSaveError, savedUser) => {
+      console.log(userSaveError);
+      if (userSaveError) {
+        if (userSaveError.errors.email) {
+          return res.send(Utils.sendResponse(500, null, [userSaveError.errors.email.message], userSaveError.errors.email.message));
+        } else {
+          return res.send(Utils.sendResponse(500, null, ['Unable to  create User. Please try again'], 'Unable to fetch user. Please try again'));
+        }
+      }
+      if (savedUser.length >= 0) {
+        return res.send(Utils.sendResponse(400, null, ['Unauthorized user'], 'Unauthorized user'));
+      }
+      return res.send(Utils.sendResponse(200, savedUser, [], `${payload.role} Created Successfully`));
+    })
+  })
 }
 exports.locationCheck = (req, res, next) => {
   let payload = req.body;

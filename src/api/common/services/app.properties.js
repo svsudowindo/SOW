@@ -1,7 +1,8 @@
 const ROLES = {
     MASTER: 'MASTER',
     TECHNICIAN: 'TECHNICIAN',
-    LOCATION: 'LOCATION'
+    LOCATION: 'LOCATION',
+    SUPER_ADMIN: 'SUPER_ADMIN'
 }
 
 module.exports = {

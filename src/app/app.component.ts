@@ -89,7 +89,43 @@ export class AppComponent {
       }
     }, error => {
       console.log(error);
-      this.alertService.openAlert('Error', '', 'Successfully Created Roles', buttons).then(alertRes => {});
+      this.alertService.openAlert('Error', '', 'Error While Creating Roles', buttons).then(alertRes => {});
+    });
+  }
+
+  /**
+   * Used to create Dummy Super admin 
+   */
+  createSuperAdmin() {
+    const obj  = {
+      'userName' : 'admin',
+      'firstName' : 'my name',
+      'lastName' : 'admin',
+      'email' : 'svsudowindo@gmail.com',
+      'phoneNumber' : 9542754461.0,
+      'licenseeNumber' : '123545',
+      'businessName' : 'business name',
+      'locationName' : 'location name',
+      'storeName' : 'store name ',
+      'address' : 'my adress',
+      'city' : 'Hyderabad',
+      'state' : 'telangana',
+      'zipcode' : '500678',
+      'role' : 'SUPER_ADMIN'
+    };
+    const buttons: ButtonModel[] = [
+      {
+        text: 'Ok',
+        dismissMessage: 'ok'
+      }
+    ];
+    this.commonRequestService.request(RequestEnums.REGISTER_USER, obj).subscribe(res => {
+      console.log(res);
+      if (res.errors.length > 0) {
+        this.alertService.openAlert('Error', '', 'Error While Creating Super admin', buttons).then(alertRes => {});
+      } else {
+        this.alertService.openAlert('Success', '', res.message, buttons).then(alertRes => {});
+      }
     });
   }
 }
