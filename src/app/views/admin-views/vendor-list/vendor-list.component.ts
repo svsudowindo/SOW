@@ -32,4 +32,11 @@ export class VendorListComponent {
   addVendor() {
     this.router.navigate(['vendor-list', 'create'])
   }
+
+  /**
+   * Editing Manufacturer
+   */
+  editManufacturer(vendor) {
+    this.router.navigate(['vendor-list', vendor._id]);
+  }
 }

@@ -13,7 +13,7 @@
     <ng-container *ngIf="vendorsList.length > 0"> 
       <ion-list>
         <ng-container *ngFor="let vendor of vendorsList">
-          <ion-item>
+          <ion-item (click)="editManufacturer(vendor)">
             <ion-label>
               <p style="font-size: 22px;">{{vendor.name}}</p>
             </ion-label>

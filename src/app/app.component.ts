@@ -100,7 +100,8 @@ export class AppComponent {
     const obj  = {
       'userName' : 'admin',
       'firstName' : 'my name',
-      'lastName' : 'admin',
+      'lastName' : 'last name',
+      'password': 'admin',
       'email' : 'svsudowindo@gmail.com',
       'phoneNumber' : 9542754461.0,
       'licenseeNumber' : '123545',

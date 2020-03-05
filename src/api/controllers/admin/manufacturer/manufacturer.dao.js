@@ -58,7 +58,7 @@ exports.getAllManufacturerByID = (req, res, next) => {
         if (manufactureResult.length <= 0) {
             return res.send(Utils.sendResponse(400, null, ['No manufacturer exist'], 'No manufacturer exist')); 
         }
-        return res.send(Utils.sendResponse(500, manufactureResult, [], 'Manufacturer Details Fetched Successfully')); 
+        return res.send(Utils.sendResponse(200, manufactureResult, [], 'Manufacturer Details Fetched Successfully')); 
     })
 }
 
@@ -120,7 +120,8 @@ exports.updateManufacturer = (req, res, next) => {
         if (manufactureResult.length <= 0) {
             return res.send(Utils.sendResponse(400, null, ['No manufacturer exist'], 'No manufacturer exist')); 
         }
-        ManufacturerModal.updateOne({_id: payload._id, email: payload.email}, payload, (updateError, updateResult) => {
+        ManufacturerModal.update({_id: payload._id, email: payload.email}, payload, (updateError, updateResult) => {
+            console.log(updateError);
             if (updateError) {
                 return res.send(Utils.sendResponse(500, null, ['Something went wrong while Updating Manufatcurer... Please try again'], 'Something went wrong while  Updating Manufatcurer... Please try again')); 
             }

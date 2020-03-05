@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input } from '@angular/core';
 import { BaseClass } from 'src/app/shared/services/common/baseClass';
 
 @Component({
@@ -9,7 +9,8 @@ import { BaseClass } from 'src/app/shared/services/common/baseClass';
   styleUrls: ['./games-modal.component.scss'],
 })
 export class GamesModalComponent extends BaseClass implements OnInit {
-  gameList = [];
+  @Input() gameList = [];
+  @Input() isEditable;
   gameForm: FormGroup;
   validationMessages = {
     name: [
@@ -31,7 +32,8 @@ export class GamesModalComponent extends BaseClass implements OnInit {
   gameFormInit() {
     this.gameForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
-      description: ['']
+      description: [''],
+      _id: ['']
     });
   }
   dismissModal() {
@@ -43,10 +45,20 @@ export class GamesModalComponent extends BaseClass implements OnInit {
   }
 
   addGame() {
-    this.gameList.push(this.gameForm.value);
+    const index = this.gameList.findIndex(res => res._id === this.gameForm.value._id);
+    if (index === -1) {
+      this.gameList.push(this.gameForm.value);
+    } else {
+      this.gameList[index] = this.gameForm.value;
+    }
     this.gameForm.patchValue({
       name: '',
-      description: ''
+      description: '',
+      _id: ''
     });
+  }
+
+  gameSelected(game) {
+    this.gameForm.patchValue(game);
   }
 }

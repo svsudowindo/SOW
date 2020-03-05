@@ -1,7 +1,7 @@
 import { BaseClass } from './../../../../../shared/services/common/baseClass';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input } from '@angular/core';
 import Utils from 'src/app/shared/services/common/utils';
 
 @Component({
@@ -12,7 +12,8 @@ import Utils from 'src/app/shared/services/common/utils';
 export class CabinetModalComponent extends BaseClass implements OnInit {
   billAcceptorList = [];
   cabinetForm: FormGroup;
-  cabinetsList = [];
+  @Input() cabinetsList = [];
+  @Input() isEditable: string;
   validationMessages = {
     name: [
       {type: 'required', message: 'Cabinet Name is Required'}
@@ -38,7 +39,8 @@ export class CabinetModalComponent extends BaseClass implements OnInit {
       name: ['', Validators.compose([Validators.required])],
       size: [''],
       monitorType: [''],
-      billAcceptor: ['']
+      billAcceptor: [''],
+      _id: ['']
     });
   }
   billAcceptorGroup(): FormGroup {
@@ -47,11 +49,10 @@ export class CabinetModalComponent extends BaseClass implements OnInit {
     });
   }
   dismissModal() {
-    this.modalController.dismiss([]);
+    this.modalController.dismiss(this.cabinetsList);
   }
 
   saveModal() {
-    console.log('sample');
     this.modalController.dismiss(this.cabinetsList);
   }
 
@@ -68,13 +69,30 @@ export class CabinetModalComponent extends BaseClass implements OnInit {
   addCabinet() {
     const obj = this.cabinetForm.value;
     obj['billAcceptor'] = this.billAcceptorList;
-    this.cabinetsList.push(obj);
+    const index = this.cabinetsList.findIndex(res=> res._id === obj._id);
+    if (index === -1) {
+      this.cabinetsList.push(obj);
+    } else {
+      this.cabinetsList[index] = obj;
+    }
     this.cabinetForm.patchValue({
       name: '',
       size: '',
       monitorType: '',
-      billAcceptor: ''
+      billAcceptor: '',
+      _id: ''
     });
     this.billAcceptorList = [];
+  }
+
+  cabinetSelected(cabinet) {
+    this.cabinetForm.patchValue({
+      name: cabinet.name,
+      size: cabinet.size,
+      monitorType: cabinet.monitorType,
+      billAcceptor: '',
+      _id: cabinet._id
+    });
+    this.billAcceptorList = cabinet.billAcceptor;
   }
 }

@@ -59,5 +59,17 @@ export const RequestEnums = {
         keys: [],
         values: []
     },
+    GET_MANUFACTURER_BY_ID: {
+        type: 'GET',
+        path: '/admin/get-manufacturer-by-id/:vendorID',
+        keys: ['vendorID'],
+        values: []
+    },
+    UPDATE_MANUFACTURER: {
+        type: 'POST',
+        path: '/admin/update-manufacturer',
+        keys: [],
+        values: []
+    }
 };
 

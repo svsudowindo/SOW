@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title class="ion-text-center">Add Cabinet</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="primary" (click)="saveModal()" [disabled]="cabinetsList.length <= 0">Save</ion-button>
+      <ion-button color="primary" (click)="saveModal()" [disabled]="cabinetsList.length <= 0">{{isEditable ? 'Update' : 'Save'}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -74,7 +74,7 @@
           </ng-container>
           <div class="ion-text-center m-t-10">
             <ion-button color="primary" expand="round" [disabled]="cabinetForm.invalid || billAcceptorList.length <= 0"
-              (click)="addCabinet()">Add Cabinet</ion-button>
+              (click)="addCabinet()">{{cabinetForm.get('_id').value ? 'Update Cabinet' : 'Add Cabinet'}}</ion-button>
           </div>
         </div>
       </form>
@@ -86,7 +86,7 @@
 
       <div *ngIf="cabinetsList.length > 0">
         <ion-list>
-          <ion-item *ngFor="let cabinet of cabinetsList">
+          <ion-item *ngFor="let cabinet of cabinetsList" (click)="cabinetSelected(cabinet)">
             <ion-label>{{cabinet.name}}</ion-label>
           </ion-item>
         </ion-list>
