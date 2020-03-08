@@ -70,6 +70,18 @@ export const RequestEnums = {
         path: '/admin/update-manufacturer',
         keys: [],
         values: []
-    }
+    },
+    POST_MACHINE_REQUEST: {
+        type: 'POST',
+        path: '/admin/request-new-machine',
+        keys: [],
+        values: []
+    },
+    GET_MACHINE_REQUEST: {
+        type: 'GET',
+        path: '/admin/get-all-machine-requests',
+        keys: [],
+        values: []
+    },
 };
 

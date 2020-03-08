@@ -10,6 +10,10 @@ const routes: Routes = [
       {
         path: '',
         component: RequestMachineComponent
+      },
+      {
+        path: 'list',
+        loadChildren: () => import('./request-machine-list/request-machine-list.module').then(m => m.RequestMachineListModule)
       }
     ]
   }

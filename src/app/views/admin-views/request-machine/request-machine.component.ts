@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
+import { AlertService, ButtonModel } from 'src/app/shared/services/common/alert/alert.service';
+import { CommonRequestService } from 'src/app/shared/services/http/common-request.service';
 import { AssignLocationModalComponent } from './../../../shared/modals/assign-location-modal/assign-location-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestEnums } from './../../../shared/constants/request-enums';
 import { LoaderService } from './../../../shared/services/common/loader/loader.service';
-import { CommonRequestService } from './../../../shared/services/http/common-request.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AssignVendorModalComponent } from 'src/app/shared/modals/assign-vendor-modal/assign-vendor-modal.component';
@@ -29,8 +31,9 @@ export class RequestMachineComponent implements OnInit {
     private modalController: ModalController,
     private commonRequestService: CommonRequestService,
     private loaderService: LoaderService,
-    private formBuilder: FormBuilder
-  ) {
+    private formBuilder: FormBuilder,
+    private alertService: AlertService,
+    private router: Router) {
     this.initRequestForm();
     this.getManufacturers();
     this.getLocationList();
@@ -105,7 +108,6 @@ export class RequestMachineComponent implements OnInit {
       return await modal.present();
     }
   public cabinetChanged(isFromBillAcceptor = false) {
-    console.log('cabinet changed');
     const cabinetID = this.requestForm.get('cabinet').get('_id').value;
     const index = this.cabinetList.findIndex(obj => obj._id === cabinetID);
     if (!isFromBillAcceptor) {
@@ -175,6 +177,30 @@ export class RequestMachineComponent implements OnInit {
   }
 
   public requestMachine() {
-    console.log(this.requestForm.value);
+    const payload = this.requestForm.value;
+    // tslint:disable-next-line: forin
+    for (const i in payload) {
+      console.log(i);
+      payload[i]['id'] = payload[i]['_id'];
+      delete payload[i]['_id']
+    }
+    console.log(JSON.stringify(payload));
+    const buttons: ButtonModel[] = [
+      {
+        text: 'Ok',
+        dismissMessage: 'ok'
+      }
+    ];
+    this.commonRequestService.request(RequestEnums.POST_MACHINE_REQUEST, payload).subscribe(res =>{
+      console.log(res);
+      if (res.errors.length > 0) {
+        this.alertService.openAlert('Error', '', res.errors[0], buttons).then(alertRes => {
+        });
+      } else {
+        this.alertService.openAlert('Success', '', 'Request Sent Successfully', buttons).then(alertRes => {
+          this.router.navigate(['request-machine', 'list']);
+        });
+      }
+    });
   }
 }

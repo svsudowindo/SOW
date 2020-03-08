@@ -20,6 +20,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use('/auth', authRoutes.authRoutes);
 app.use('/admin', function(req, res, next) {
     const authToken = req.get('Authorization');
+    console.log(authToken);
     User.find({authToken: authToken}, (userError, userResult) => {
         if (userError) {
               return res.send(Utils.sendResponse(500, null, ['Unable to  fetch User. Please try again'], 'Unable to fetch user. Please try again'));

@@ -1,0 +1,27 @@
+<ion-toolbar color="primary">
+</ion-toolbar>
+<ion-content>
+  <div>
+    <ng-container *ngIf="requestList.length <= 0"> 
+      <div class="ion-text-center">
+        <p class="m-b-0">No records</p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="requestList.length > 0"> 
+      <ion-list>
+        <ng-container *ngFor="let request of requestList">
+          <ion-item>
+            <ion-label>
+              <p style="font-size: 18px;">{{request.manufacturer.name}}</p>
+              <ion-row class="ion-justify-content-between">
+                <p style="font-size: 14px;">Requested By: {{request.requestedBy.name}}</p>
+                <p style="font-size: 14px;">Status: {{request.status | titlecase}}</p>
+
+                </ion-row>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    </ng-container>
+  </div>
+</ion-content>
