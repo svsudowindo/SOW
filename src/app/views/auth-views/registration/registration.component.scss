@@ -1,0 +1,21 @@
+.toolbar {
+    --ion-background-color: transparent;
+    color: white;
+}
+
+.register-text {
+    color: white;
+    font-size: 22px;
+}
+
+.register-text-fields div ion-item ion-label,ion-input,ion-textarea {
+    color: white;
+    font-size: 18px;
+}
+
+.register-button {
+    border-color: white;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}

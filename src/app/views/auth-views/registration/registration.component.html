@@ -1,12 +1,13 @@
-<ion-toolbar color="primary">
-  <ion-title>Register</ion-title>
+<ion-toolbar color="transparent">
+  <!-- <i class="fa fa-arrow-left" aria-hidden="true" style='color: white; font-size: 25px; margin-top:20px; margin-left: 15px'></i> -->
+  <ion-title class="register-text mt-10">Register</ion-title>
 </ion-toolbar>
 
-<ion-content>
-  <div class="center m-t-20 w-p-100">
-    <div class="m-l-r-10 h-px-90" *ngIf="!isSelfRegister">
+<ion-content class="toolbar">
+  <div class="center m-t-15 w-p-100">
+    <div class="m-l-r-10 h-px-90 register-text" *ngIf="!isSelfRegister">
       <ion-item>
-        <ion-label position="floating">Select Role<span class="error">*</span></ion-label>
+        <ion-label position="floating" >Select Role<span class="error">*</span></ion-label>
         <ion-select [(ngModel)]="selectedRole" (ionChange)="getMasterBasedOnRole()">
           <ng-container *ngFor="let role of roles">
           <ion-select-option [value]="role.name">{{role.name}}</ion-select-option>
@@ -15,11 +16,11 @@
       </ion-item>
     </div>
 
-    <form [formGroup]="registerForm" *ngIf="selectedRole">
-      <div class="m-l-r-10 h-px-90">
+    <form [formGroup]="registerForm" *ngIf="selectedRole" class="register-text-fields">
+      <div class="m-l-r-10 h-px-90 register-text">
         <ion-item>
-          <ion-label position="floating">Licensee Number <span class="error">*</span></ion-label>
-          <ion-input type="text" formControlName="licenseeNumber" (ionFocus)="openLicenseeModal()"></ion-input>
+          <ion-label position="floating" >Licensee Number <span class="error">*</span></ion-label>
+          <ion-input type="text" formControlName="licenseeNumber" (ionFocus)="openLicenseeModal()" ></ion-input>
         </ion-item>
         <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
           <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
@@ -167,15 +168,15 @@
       </div> -->
 
 
-      <div class="m-l-r-10 m-t-10 m-b-10 ion-text-center">
-        <ion-button expand="block" fill="outline" [disabled]="registerForm.invalid" (click)="register()">Register
+      <div class="m-l-r-10 m-b-10 ion-text-center  mt-10">
+        <ion-button expand="block" fill="outline" [disabled]="registerForm.invalid" (click)="register()" class='w-50-p center register-button'>Register
         </ion-button>
-        <div class="m-t-10">
+        <div class="m-t-20 mb-15">
           <div class="ion-float-left">
-            <a routerLink="/forgot-password">Forgot Password ?</a>
+            <a routerLink="/forgot-password" class="link">Forgot Password ?</a>
           </div>
           <div class="ion-float-right">
-            <a routerLink="/login">Login ?</a>
+            <a routerLink="/login" class="link">Login ?</a>
           </div>
         </div>
       </div>

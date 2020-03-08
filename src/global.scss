@@ -33,17 +33,65 @@
   border-radius: 50%;
 }
 
+.mt-15 {
+    margin-top: 15px !important
+}
+
+.mt-10 {
+    margin-top: 10px !important
+}
+
+.py-15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.w-50-p {
+    width: 50%;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
 .error {
-  color: red;
+  color: #ff6a00;
   font-size: 14px;
 }
 .error.height-match {
     margin-top: 5px;
-    margin-left: 10px;
+    margin-left: 15%;
 }
-
+.ver_hor_center {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.hor_center {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
 .center {
     margin:auto;
+}
+.my-30 {
+    margin-top:30px;
+    margin-bottom: 30px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.m-t-15 {
+    margin-top: 15px;
+}
+
+.m-t-20 {
+    margin-top: 20px;
 }
 
 .action-buttons {
@@ -51,7 +99,13 @@
         width: 140px;
     }
 }
-
+app-login.ion-page,app-forgot-password.ion-page,app-registration.ion-page {
+    background: linear-gradient(90deg, #08567b, #032b45);
+}
+.link {
+    color:white;
+    font-size:20px
+}
 
 ion-button.button-outline.ion-activatable  {
     --border-color:  linear-gradient(90deg, #08567b, #032b45);;
