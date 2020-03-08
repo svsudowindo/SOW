@@ -25,6 +25,8 @@ export class LoaderService {
     }
 
     dissmissLoading() {
-        this.loadingController.dismiss();
+        setTimeout(() => {
+            this.loadingController.dismiss();
+        }, 1000);
     }
 }

@@ -67,6 +67,13 @@ const routes: Routes = [
           title: 'Manufacturer'
         },
         loadChildren: () => import('./views/admin-views/vendor-list/vendor-list.module').then(m => m.VendorListModule)
+      },
+      {
+        path: 'request-machine',
+        data: {
+          title: 'Request Machine'
+        },
+        loadChildren: () => import('./views/admin-views/request-machine/request-machine.module').then(m => m.RequestMachineModule)
       }
     ]
   },

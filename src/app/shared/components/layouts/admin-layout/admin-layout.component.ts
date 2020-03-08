@@ -1,3 +1,6 @@
+import { LocalStorageEnums } from './../../../constants/localstorage-enums';
+import { StorageService } from './../../../services/common/storage.service';
+import { ROLES } from './../../../constants/app-properties';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -10,29 +13,11 @@ import { filter } from 'rxjs/operators';
 export class AdminLayoutComponent implements OnInit {
 
   title = '';
-  public appPages = [
-    {
-      title: 'Register',
-      url: '/register-by-super-admin',
-      icon: 'home'
-    },
-    {
-      title: 'Register',
-      url: '/register-by-super-admin',
-      icon: 'home'
-    },
-    {
-      title: 'Manufacturer',
-      url: '/vendor-list',
-      icon: 'home'
-    },
-    {
-      title: 'Logout',
-      url: '/login',
-      icon: 'log-out'
-    }
-  ];
-  constructor(private router: Router) {
+  ROLES_ENUM = ROLES;
+  logginRole: any;
+  constructor(
+    private router: Router,
+    private storageService: StorageService) {
     this.router.events.pipe(
       filter(e => e instanceof RouterEvent)
     ).subscribe(e => {
@@ -40,6 +25,8 @@ export class AdminLayoutComponent implements OnInit {
         this.title = this.router.routerState.root.firstChild.firstChild.snapshot.data.title;
       }
     });
+    this.logginRole = this.storageService.getLocalStorageItem(LocalStorageEnums.ROLE_NAME);
+    console.log(this.logginRole);
   }
 
   ngOnInit() {

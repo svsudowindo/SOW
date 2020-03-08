@@ -1,0 +1,71 @@
+<ion-toolbar color="primary">
+</ion-toolbar>
+<ion-content>
+  <div>
+    <form [formGroup]="requestForm">
+      <div class="m-l-r-10 h-px-90" formGroupName="manufacturer">
+        <ion-item>
+          <ion-label position="floating">Manufacturer <span class="error">*</span></ion-label>
+          <ion-input type="text" (ionFocus)="openManufacturerModal()" formControlName="name"></ion-input>
+      </ion-item>
+        <!-- <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
+        </div> -->
+      </div>
+
+      <div class="m-l-r-10 h-px-90" formGroupName="cabinet">
+        <ion-item>
+          <ion-label position="floating">Cabinet <span class="error">*</span></ion-label>
+          <ion-select interface="alert" (ionChange)="cabinetChanged()" formControlName="_id">
+            <ng-container *ngFor="let cabinet of cabinetList">
+            <ion-select-option [value]="cabinet._id">{{cabinet.name}}</ion-select-option>
+          </ng-container>
+          </ion-select>
+        </ion-item>
+        <!-- <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
+        </div> -->
+      </div>
+
+      <div class="m-l-r-10 h-px-90" formGroupName="billAcceptor">
+        <ion-item>
+          <ion-label position="floating">Bill Acceptor <span class="error">*</span></ion-label>
+          <ion-select interface="alert" (ionChange)="cabinetChanged(true)" formControlName="_id">
+            <ng-container *ngFor="let billAcceptor of billAcceptorList">
+            <ion-select-option [value]="billAcceptor._id">{{billAcceptor.name}}</ion-select-option>
+          </ng-container>
+          </ion-select>
+        </ion-item>
+        <!-- <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
+        </div> -->
+      </div>
+
+      <div class="m-l-r-10 h-px-90" formGroupName="game">
+        <ion-item>
+          <ion-label position="floating">Games <span class="error">*</span></ion-label>
+          <ion-input type="text" (ionFocus)="openGameModal()" formControlName="name"></ion-input>
+        </ion-item>
+        <!-- <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
+        </div> -->
+      </div>
+
+      <div class="m-l-r-10 h-px-90" formGroupName="location">
+        <ion-item>
+          <ion-label position="floating">Select Location<span class="error">*</span></ion-label>
+          <ion-input type="text" (ionFocus)="openLocationsModal()" formControlName="businessName"></ion-input>
+      </ion-item>
+        <!-- <div [hidden]="!isValidField(registerForm, 'licenseeNumber')">
+          <p class="error height-match">{{getErrorMessage(registerForm, validationMessages, 'licenseeNumber')}}</p>
+        </div> -->
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="ion-text-center">
+  <ion-button expand="round"  fill="outline" (click)="requestMachine()">Request Machine</ion-button>
+  </div>
+</ion-footer>

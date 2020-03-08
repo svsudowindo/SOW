@@ -119,7 +119,7 @@ export class ModifyVendorComponent extends BaseClass {
     const url = this.vendorID ? RequestEnums.UPDATE_MANUFACTURER : RequestEnums.POST_MANUFACTURERS;
     console.log(this.vendorForm.value);
     const payload = this.vendorForm.value;
-    if(this.vendorID) {
+    if (this.vendorID) {
       payload._id = this.vendorID;
     }
     const buttons: ButtonModel[] = [
